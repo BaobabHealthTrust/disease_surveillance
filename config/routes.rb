@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   get 'admin/home'
 
   get 'admin/index'
-
+  get 'users/login'
+  post 'users/login'
+  post 'users/authenticate'
+  post 'users/create'
+  get 'users/logout' 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

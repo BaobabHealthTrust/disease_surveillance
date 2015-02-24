@@ -8,4 +8,5 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem "bcrypt-ruby", :require => "bcrypt"
 #gem 'passenger'
