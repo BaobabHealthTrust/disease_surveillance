@@ -1,240 +1,293 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+  <head>
     <title>Map</title>
-    <script src="/assets/data/coords.js"></script>
-    <script src="/assets/data/districts.js"></script>
-    <script src="/assets/data/sites_by_zones.js"></script>
-    <script src="/assets/data/zones.js"></script>
-    <script src="/assets/data/district_offsets.js"></script>
+    <script type="text/javascript" src="/assets/data/coords.js"></script>
+    <script type="text/javascript" src="/assets/data/districts.js"></script>
+    <script type="text/javascript" src="/assets/data/sites_by_zones.js"></script>
+    <script type="text/javascript" src="/assets/data/zones.js"></script>
+    <script type="text/javascript" src="/assets/data/district_offsets.js"></script>
     <style>
-        body {
-            font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
-        }
+      #c_district{
+        position:absolute;
+        width: 46%;
+        top:59.5px;
+        left: 50%;
+      }
+
+      #c_zone{
+        position:absolute;
+        width: 46%;
+        bottom:-2%;
+        left: 50%;
+      }
     </style>
-</head>
-<body onresize="resize()" onload="resize()">
-<div id="c_map" style="width: 50%; height: 300px; text-align: center; float: left;  border: 1px solid #000;">
-    <object id="map" type="image/svg+xml" data="/assets/Malawi.svg" style="height: 100%; width: 100%;"></object>
-    <div id="national_label"
-         style="position: absolute; top: 20px; left: 20px; border: 1px solid #ccc; padding: 5px; font-size: 22px;">
+  </head>
+  <body onresize="resize()" onload="resize()">
+    <!--<div id="c_map" style="width: 49%; height: 300px; text-align: center; float: left;  border: 1px solid #000;">
+      <object id="map" type="image/svg+xml" data="/assets/Malawi.svg" style="height: 100%; width: 100%;"></object>
+      <div id="national_label" style="position:absolute; top: 60px; left:42%;">
         Chitipa
+      </div>
+    </div>-->
+    <div class="row-fluid" style="width: 46%;">
+      <div class="block">
+        <div class="navbar navbar-inner block-header">
+          <div class="muted pull-left" id="national_label">
+            Chitipa
+          </div>
+        </div>
+        <div class="block-content collapse in">
+          <div id="c_map">
+            <object id="map" type="image/svg+xml" data="/assets/Malawi.svg" style="height: 100%; width: 100%;"></object>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<div id="c_district" style="width: 50%; height: 300px; text-align: center; float: right; border: 1px solid #000;">
-    <object id="district" type="image/svg+xml" data="/assets/mw/chitipa.svg" style="height: 100%; width: 100%;"></object>
-    <div id="district_label"
-         style="position: absolute; top: 20px; right: 20px; border: 1px solid #ccc; padding: 5px; font-size: 22px;">
+
+    <div class="row-fluid" id="c_district">
+      <div class="block">
+        <div class="navbar navbar-inner block-header">
+          <div class="muted pull-right" id="district_label">
+            Chitipa
+          </div>
+        </div>
+        <div class="block-content collapse in">
+          <div id="c_map">
+            <object id="district" type="image/svg+xml" data="/assets/mw/chitipa.svg" style="height: 200px; width: 100%;"></object>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--<div id="c_district" style="width: 50%; height: 300px; text-align: center; float: right; border: 1px solid #000;">
+      <object id="district" type="image/svg+xml" data="/assets/mw/chitipa.svg" style="height: 100%; width: 100%;"></object>
+      <div id="district_label"
+           style="position: absolute; top: 61px; right: 20px; border: 1px solid #ccc; padding: 5px; font-size: 22px;">
         Chitipa
+      </div>
+    </div>-->
+    <div class="row-fluid" id="c_zone">
+      <div class="block">
+        <div class="navbar navbar-inner block-header">
+          <div class="muted pull-right" id="zone_label">
+            Northern
+          </div>
+        </div>
+        <div class="block-content collapse in">
+          <object id="zone" type="image/svg+xml" data="/assets/mw/zone_northern.svg" style="height: 328px; width: 100%;"></object>
+        </div>
+      </div>
     </div>
-</div>
-<div id="c_zone"
-     style="width: 50%; height: 300px; text-align: center; float: right; border: 1px solid #000; margin-top: 10px;">
-    <object id="zone" type="image/svg+xml" data="/assets/mw/zone_northern.svg"
-            style="height: 100%; width: 100%;"></object>
-    <div id="zone_label"
-         style="position: absolute; bottom: 20px; right: 20px; border: 1px solid #ccc; padding: 5px; font-size: 22px;">
+
+    <!--<div id="c_zone"
+         style="width: 50%; height: 300px; text-align: center; float: right; border: 1px solid #000; margin-top: 10px;">
+      <object id="zone" type="image/svg+xml" data="/assets/mw/zone_northern.svg"
+              style="height: 100%; width: 100%;"></object>
+      <div id="zone_label"
+           style="position: absolute; bottom: 20px; right: 20px; border: 1px solid #ccc; padding: 5px; font-size: 22px;">
         Northern
-    </div>
-</div>
-<script>
+      </div>
+    </div>-->
+    <script>
 
-var refPoints = [-9.331537, -17.158189, 32.674051, 35.969950];
-var offsets = [10, 295, 10, 710];
-var limits = [305, 720];
-var previous;
+      var refPoints = [-9.331537, -17.158189, 32.674051, 35.969950];
+      var offsets = [10, 295, 10, 710];
+      var limits = [305, 720];
+      var previous;
 
-function __$(id) {
-    return document.getElementById(id);
-}
+      function __$(id) {
+        return document.getElementById(id);
+      }
 
-function latLon2Coord(lat, lon) {
+      function latLon2Coord(lat, lon) {
 
-    var x, y;
+        var x, y;
 
-    x = ((offsets[1] - offsets[0]) * ((Math.abs(lon) - Math.abs(refPoints[2])) / (Math.abs(refPoints[3]) - Math.abs(refPoints[2])))) // + offsets[0];
+        x = ((offsets[1] - offsets[0]) * ((Math.abs(lon) - Math.abs(refPoints[2])) / (Math.abs(refPoints[3]) - Math.abs(refPoints[2])))) // + offsets[0];
 
-    y = ((offsets[3] - offsets[2]) * ((Math.abs(lat) - Math.abs(refPoints[0])) / (Math.abs(refPoints[1]) - Math.abs(refPoints[0])))) // + offsets[2];
+        y = ((offsets[3] - offsets[2]) * ((Math.abs(lat) - Math.abs(refPoints[0])) / (Math.abs(refPoints[1]) - Math.abs(refPoints[0])))) // + offsets[2];
 
-    return [x, y]
+        return [x, y]
 
-}
+      }
 
-function resize() {
-    if (__$("main")) {
-        __$("main").style.height = (window.innerHeight - 20) + "px";
-    }
+      function resize() {
+        if (__$("main")) {
+          __$("main").style.height = (window.innerHeight - 20) + "px";
+        }
 
-    if (__$("c_map")) {
-        __$("c_map").style.height = (window.innerHeight - 20) + "px";
-    }
+        if (__$("c_map")) {
+          __$("c_map").style.height = (window.innerHeight - 20) + "px";
+        }
 
-    if (__$("c_district")) {
-        __$("c_district").style.height = ((window.innerHeight / 2) - 20) + "px";
-    }
+        if (__$("c_district")) {
+          __$("c_district").style.height = ((window.innerHeight / 2) - 20) + "px";
+        }
 
-    if (__$("c_district")) {
-        __$("c_district").style.width = ((window.innerWidth / 2) - 20) + "px";
-    }
+        if (__$("c_district")) {
+          __$("c_district").style.width = ((window.innerWidth / 2) - 20) + "px";
+        }
 
-    if (__$("c_zone")) {
-        __$("c_zone").style.height = ((window.innerHeight / 2) - 12) + "px";
-    }
+        if (__$("c_zone")) {
+          __$("c_zone").style.height = ((window.innerHeight / 2) - 12) + "px";
+        }
 
-    if (__$("c_zone")) {
-        __$("c_zone").style.width = ((window.innerWidth / 2) - 20) + "px";
-    }
+        if (__$("c_zone")) {
+          __$("c_zone").style.width = ((window.innerWidth / 2) - 20) + "px";
+        }
 
-    if (__$("container")) {
-        __$("container").style.height = (window.innerHeight - 320) + "px";
-    }
-}
+        if (__$("container")) {
+          __$("container").style.height = (window.innerHeight - 320) + "px";
+        }
+      }
 
-function setDefaults() {
+      function setDefaults() {
 
-    var svg = __$("map").contentDocument;
+        var svg = __$("map").contentDocument;
 
-    if (svg == null) {
+        if (svg == null) {
 
-        setTimeout("setDefaults()", 200);
+          setTimeout("setDefaults()", 200);
 
-        return;
+          return;
 
-    }
+        }
 
-    var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
-        "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
-        "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"]
+        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+          "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
+          "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"]
 
-    for (var i = 0; i < elements.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
 
-        if (svg.getElementById(elements[i])) {
+          if (svg.getElementById(elements[i])) {
 
             svg.getElementById(elements[i]).onmouseover = function () {
 
-                this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+              this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
 
             }
 
             svg.getElementById(elements[i]).onmouseout = function () {
 
-                this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+              this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
 
             }
 
             svg.getElementById(elements[i]).onclick = function () {
 
-                drawBorder(this.id);
+              drawBorder(this.id);
 
             }
 
+          }
         }
-    }
 
-    // loadSites();
-}
+        // loadSites();
+      }
 
-function insertSite(x, y, color, id) {
-    var doc = __$("map").contentDocument;
+      function insertSite(x, y, color, id) {
+        var doc = __$("map").contentDocument;
 
-    var mw = doc.getElementById("malawi");
+        var mw = doc.getElementById("malawi");
 
-    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-    circle.setAttribute("cx", x);
+        circle.setAttribute("cx", x);
 
-    circle.setAttribute("cy", y);
+        circle.setAttribute("cy", y);
 
-    circle.setAttribute("r", 2);
+        circle.setAttribute("r", 2);
 
-    circle.setAttribute("id", id);
+        circle.setAttribute("id", id);
 
-    circle.setAttribute("fill", color);
+        circle.setAttribute("fill", color);
 
-    circle.setAttribute("stroke", "black");
+        circle.setAttribute("stroke", "black");
 
-    mw.appendChild(circle);
-}
+        mw.appendChild(circle);
+      }
 
-function insertSiteByOffset(x, y, color, id, district) {
+      function insertSiteByOffset(x, y, color, id, district) {
 
-    var doc = __$("district").contentDocument;
+        var doc = __$("district").contentDocument;
 
-    var mw = doc.getElementById(district);
+        var mw = doc.getElementById(district);
 
-    var target = districtOffsets[district];
+        var target = districtOffsets[district];
 
-    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-    circle.setAttribute("cx", (x - target.x));
+        circle.setAttribute("cx", (x - target.x));
 
-    circle.setAttribute("cy", (y - target.y));
+        circle.setAttribute("cy", (y - target.y));
 
-    circle.setAttribute("r", 2);
+        circle.setAttribute("r", 2);
 
-    circle.setAttribute("id", id);
+        circle.setAttribute("id", id);
 
-    circle.setAttribute("fill", color);
+        circle.setAttribute("fill", color);
 
-    circle.setAttribute("stroke", "black");
+        circle.setAttribute("stroke", "black");
 
-    mw.appendChild(circle);
-}
+        mw.appendChild(circle);
+      }
 
-function insertZoneSiteByOffset(x, y, color, id, district) {
+      function insertZoneSiteByOffset(x, y, color, id, district) {
 
-    var doc = __$("zone").contentDocument;
+        var doc = __$("zone").contentDocument;
 
-    var mw = doc.getElementById(district);
+        var mw = doc.getElementById(district);
 
-    var target = districtOffsets[district];
+        var target = districtOffsets[district];
 
-    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-    circle.setAttribute("cx", (x - target.x));
+        circle.setAttribute("cx", (x - target.x));
 
-    circle.setAttribute("cy", (y - target.y));
+        circle.setAttribute("cy", (y - target.y));
 
-    circle.setAttribute("r", 2);
+        circle.setAttribute("r", 2);
 
-    circle.setAttribute("id", id);
+        circle.setAttribute("id", id);
 
-    circle.setAttribute("fill", color);
+        circle.setAttribute("fill", color);
 
-    circle.setAttribute("stroke", "black");
+        circle.setAttribute("stroke", "black");
 
-    mw.appendChild(circle);
-}
+        mw.appendChild(circle);
+      }
 
-function loadSites() {
+      function loadSites() {
 
-    for (var i = 0; i < sites.length; i++) {
+        for (var i = 0; i < sites.length; i++) {
 
-        var result = latLon2Coord(sites[i][0], sites[i][1])
+          var result = latLon2Coord(sites[i][0], sites[i][1])
 
-        var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
+          var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
 
-        var pos = Math.round((Math.random() * 10)) % 3;
+          var pos = Math.round((Math.random() * 10)) % 3;
 
-        insertSite(result[0], result[1], colors[pos], 'site' + i);
+          insertSite(result[0], result[1], colors[pos], 'site' + i);
 
-    }
+        }
 
-}
+      }
 
-var uCoords = {};
+      var uCoords = {};
 
-function getCoords() {
+      function getCoords() {
 
-    var svg = __$("map").contentDocument;
+        var svg = __$("map").contentDocument;
 
-    var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
-        "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
-        "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
+        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+          "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
+          "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
 
-    for (var i = 0; i < elements.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
 
-        if (svg.getElementById(elements[i])) {
+          if (svg.getElementById(elements[i])) {
 
             var element = svg.getElementById(elements[i]);
 
@@ -242,132 +295,132 @@ function getCoords() {
 
             for (var j = 0; j < element.children.length; j++) {
 
-                if (element.children[j].tagName.match(/desc/i)) {
+              if (element.children[j].tagName.match(/desc/i)) {
 
-                    for (var k = 0; k < element.children[j].children.length; k++) {
+                for (var k = 0; k < element.children[j].children.length; k++) {
 
-                        district[element.children[j].children[k].tagName.replace(/namespace\:/i, "")] = element.children[j].children[k].innerHTML;
-
-                    }
+                  district[element.children[j].children[k].tagName.replace(/namespace\:/i, "")] = element.children[j].children[k].innerHTML;
 
                 }
+
+              }
 
             }
 
             uCoords[elements[i]] = district;
 
+          }
         }
-    }
 
-}
+      }
 
-function loadDistricts() {
+      function loadDistricts() {
 
-    var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
-        "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
-        "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
+        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+          "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
+          "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
 
-    for (var i = 0; i < elements.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
 
-        var district = districts[elements[i]];
+          var district = districts[elements[i]];
 
-        if (!district)
+          if (!district)
             continue;
 
-        var result = latLon2Coord(district["lat"], district["lon"])
+          var result = latLon2Coord(district["lat"], district["lon"])
 
-        var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
+          var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
 
-        var pos = Math.round((Math.random() * 10)) % 3;
+          var pos = Math.round((Math.random() * 10)) % 3;
 
-        insertSite(result[0], result[1], colors[0], 0);
+          insertSite(result[0], result[1], colors[0], 0);
 
-    }
+        }
 
-}
+      }
 
-function drawBorders() {
+      function drawBorders() {
 
-    var svg = __$("map").contentDocument;
+        var svg = __$("map").contentDocument;
 
-    var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
-        "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
-        "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
+        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+          "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
+          "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
 
-    for (var i = 0; i < elements.length; i++) {
+        for (var i = 0; i < elements.length; i++) {
 
-        var element = svg.getElementById(elements[i]).getBBox();
+          var element = svg.getElementById(elements[i]).getBBox();
 
-        var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        rect.setAttributeNS(null, 'x', element.x);
-        rect.setAttributeNS(null, 'y', element.y);
-        rect.setAttributeNS(null, 'height', element.height);
-        rect.setAttributeNS(null, 'width', element.width);
-        rect.setAttributeNS(null, 'stroke', 'red');
-        rect.setAttributeNS(null, 'fill', 'none');
-        rect.setAttributeNS(null, 'id', 'rect' + elements[i]);
-        svg.getElementById("malawi").appendChild(rect);
+          var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+          rect.setAttributeNS(null, 'x', element.x);
+          rect.setAttributeNS(null, 'y', element.y);
+          rect.setAttributeNS(null, 'height', element.height);
+          rect.setAttributeNS(null, 'width', element.width);
+          rect.setAttributeNS(null, 'stroke', 'red');
+          rect.setAttributeNS(null, 'fill', 'none');
+          rect.setAttributeNS(null, 'id', 'rect' + elements[i]);
+          svg.getElementById("malawi").appendChild(rect);
 
-    }
-}
+        }
+      }
 
-function drawBorder(district) {
+      function drawBorder(district) {
 
-    var names = {
-        "chitipa": "Chitipa",
-        "karonga": 'Karonga',
-        "rumphi": 'Rumphi',
-        "mzimba": "Mzimba",
-        "nkhatabay": "Nkhata Bay",
-        "nkhotakota": "Nkhotakota",
-        "salima": "Salima",
-        "kasungu": "Kasungu",
-        "dedza": "Dedza",
-        "lilongwe": "Lilongwe",
-        "ntchisi": "Ntchisi",
-        "ntcheu": "Ntcheu",
-        "mchinji": "Mchinji",
-        "dowa": "Dowa",
-        "balaka": "Balaka",
-        "zomba": "Zomba",
-        "machinga": "Machinga",
-        "blantyre": "Blantyre",
-        "machinga": "Machinga",
-        "chiradzulu": "Chiradzulu",
-        "chikwawa": "Chikwawa",
-        "nsanje": "Nsanje",
-        "neno": "Neno",
-        "mwanza": "Mwanza",
-        "phalombe": "Phalombe",
-        "mulanje": "Mulanje",
-        "likoma": "Likoma",
-        "thyolo": "Thyolo",
-        "mangochi": "Mangochi"
-    };
+        var names = {
+          "chitipa": "Chitipa",
+          "karonga": 'Karonga',
+          "rumphi": 'Rumphi',
+          "mzimba": "Mzimba",
+          "nkhatabay": "Nkhata Bay",
+          "nkhotakota": "Nkhotakota",
+          "salima": "Salima",
+          "kasungu": "Kasungu",
+          "dedza": "Dedza",
+          "lilongwe": "Lilongwe",
+          "ntchisi": "Ntchisi",
+          "ntcheu": "Ntcheu",
+          "mchinji": "Mchinji",
+          "dowa": "Dowa",
+          "balaka": "Balaka",
+          "zomba": "Zomba",
+          "machinga": "Machinga",
+          "blantyre": "Blantyre",
+          "machinga": "Machinga",
+          "chiradzulu": "Chiradzulu",
+          "chikwawa": "Chikwawa",
+          "nsanje": "Nsanje",
+          "neno": "Neno",
+          "mwanza": "Mwanza",
+          "phalombe": "Phalombe",
+          "mulanje": "Mulanje",
+          "likoma": "Likoma",
+          "thyolo": "Thyolo",
+          "mangochi": "Mangochi"
+        };
 
-    var svg = __$("map").contentDocument;
+        var svg = __$("map").contentDocument;
 
-    if (svg.getElementById('rect' + district)) {
+        if (svg.getElementById('rect' + district)) {
 
-        unloadDistrictSites(district);
+          unloadDistrictSites(district);
 
-        svg.getElementById("malawi").removeChild(svg.getElementById('rect' + district));
+          svg.getElementById("malawi").removeChild(svg.getElementById('rect' + district));
 
-    } else {
+        } else {
 
-        var element = svg.getElementById(district).getBBox();
+          var element = svg.getElementById(district).getBBox();
 
-        var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        rect.setAttributeNS(null, 'x', element.x);
-        rect.setAttributeNS(null, 'y', element.y);
-        rect.setAttributeNS(null, 'height', element.height);
-        rect.setAttributeNS(null, 'width', element.width);
-        rect.setAttribute('stroke', 'none');     //'rgba(128,128,128,0.5)');
-        rect.setAttribute('fill', 'none');
-        rect.setAttribute('id', 'rect' + district);
-        svg.getElementById("malawi").appendChild(rect);
+          var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+          rect.setAttributeNS(null, 'x', element.x);
+          rect.setAttributeNS(null, 'y', element.y);
+          rect.setAttributeNS(null, 'height', element.height);
+          rect.setAttributeNS(null, 'width', element.width);
+          rect.setAttribute('stroke', 'none');     //'rgba(128,128,128,0.5)');
+          rect.setAttribute('fill', 'none');
+          rect.setAttribute('id', 'rect' + district);
+          svg.getElementById("malawi").appendChild(rect);
 
-        if (svg.getElementById('cursor')) {
+          if (svg.getElementById('cursor')) {
 
             var cursor = svg.getElementById('cursor');
 
@@ -376,7 +429,7 @@ function drawBorder(district) {
             cursor.setAttributeNS(null, 'height', element.height);
             cursor.setAttributeNS(null, 'width', element.width);
 
-        } else {
+          } else {
 
             var cursor = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
             cursor.setAttributeNS(null, 'x', element.x);
@@ -388,130 +441,130 @@ function drawBorder(district) {
             cursor.setAttribute('id', 'cursor');
             svg.getElementById("malawi").appendChild(cursor);
 
-        }
+          }
 
-        __$("district").outerHTML = __$("district").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/' + district + '.svg"')
+          __$("district").outerHTML = __$("district").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/' + district + '.svg"')
 
-        var target = sites_by_zones[district];
+          var target = sites_by_zones[district];
 
-        switch (target[0]["region"]) {
+          switch (target[0]["region"]) {
             case "North":
-                __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_northern.svg"');
+              __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_northern.svg"');
 
-                setTimeout("loadZoneSitesByOffsets('zone_northern')", 500);
+              setTimeout("loadZoneSitesByOffsets('zone_northern')", 500);
 
-                break;
+              break;
             case "Central":
-                if (target[0]["zone"] == "Central East") {
+              if (target[0]["zone"] == "Central East") {
 
-                    __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_c_east.svg"')
+                __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_c_east.svg"')
 
-                    setTimeout("loadZoneSitesByOffsets('zone_c_east')", 500);
+                setTimeout("loadZoneSitesByOffsets('zone_c_east')", 500);
 
-                } else if (target[0]["zone"] == "Central West") {
+              } else if (target[0]["zone"] == "Central West") {
 
-                    __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_c_west.svg"')
+                __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_c_west.svg"')
 
-                    setTimeout("loadZoneSitesByOffsets('zone_c_west')", 500);
+                setTimeout("loadZoneSitesByOffsets('zone_c_west')", 500);
 
-                }
-                break;
+              }
+              break;
             case "South":
-                if (target[0]["zone"] == "South East") {
+              if (target[0]["zone"] == "South East") {
 
-                    __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_s_east.svg"')
+                __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_s_east.svg"')
 
-                    setTimeout("loadZoneSitesByOffsets('zone_s_east')", 500);
+                setTimeout("loadZoneSitesByOffsets('zone_s_east')", 500);
 
-                } else if (target[0]["zone"] == "South West") {
+              } else if (target[0]["zone"] == "South West") {
 
-                    __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_s_west.svg"')
+                __$("zone").outerHTML = __$("zone").outerHTML.replace(/data="(.+?)"/, 'data="/assets/mw/zone_s_west.svg"')
 
-                    setTimeout("loadZoneSitesByOffsets('zone_s_west')", 500);
+                setTimeout("loadZoneSitesByOffsets('zone_s_west')", 500);
 
-                }
-                break;
-        }
+              }
+              break;
+          }
 
-        if (previous != undefined) {
+          if (previous != undefined) {
             unloadDistrictSites(previous);
-        }
+          }
 
-        previous = district;
+          previous = district;
 
-        loadDistrictSites(district);
+          loadDistrictSites(district);
 
-        setTimeout("loadDistrictSitesByOffsets('" + district + "')", 500);
+          setTimeout("loadDistrictSitesByOffsets('" + district + "')", 500);
 
-        if(__$("national_label")){
+          if(__$("national_label")){
 
             __$("national_label").innerHTML = names[district];
 
-        }
+          }
 
-        if(__$("district_label")){
+          if(__$("district_label")){
 
             __$("district_label").innerHTML = names[district];
 
+          }
+
         }
 
-    }
+      }
 
-}
+      function loadDistrictSitesByOffsets(district) {
 
-function loadDistrictSitesByOffsets(district) {
+        var target = sites_by_zones[district];
 
-    var target = sites_by_zones[district];
+        for (var i = 0; i < target.length; i++) {
 
-    for (var i = 0; i < target.length; i++) {
+          var result = latLon2Coord(target[i]["latitude"], target[i]["longitude"])
 
-        var result = latLon2Coord(target[i]["latitude"], target[i]["longitude"])
+          var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
 
-        var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
+          var pos = 0;    // Math.round((Math.random() * 10)) % 3;
 
-        var pos = 0;    // Math.round((Math.random() * 10)) % 3;
+          insertSiteByOffset(result[0], result[1], colors[pos], district + '_' + target[i]["facility_id"], district);
 
-        insertSiteByOffset(result[0], result[1], colors[pos], district + '_' + target[i]["facility_id"], district);
+        }
 
-    }
+      }
 
-}
+      function loadZoneSitesByOffsets(district) {
+        var zone, region;
 
-function loadZoneSitesByOffsets(district) {
-    var zone, region;
-
-    switch (district) {
-        case "zone_northern":
+        switch (district) {
+          case "zone_northern":
             zone = "Northern";
             region = "North";
             break;
-        case "zone_c_east":
+          case "zone_c_east":
             region = "Central";
             zone = "Central East";
             break;
-        case "zone_c_west":
+          case "zone_c_west":
             region = "Central";
             zone = "Central West";
             break;
-        case "zone_s_east":
+          case "zone_s_east":
             region = "South";
             zone = "South East";
             break;
-        case "zone_s_west":
+          case "zone_s_west":
             region = "South";
             zone = "South West";
             break;
-    }
+        }
 
-    if (zone == undefined || region == undefined) return;
+        if (zone == undefined || region == undefined) return;
 
-    var zone_districts = Object.keys(zones[region][zone]);
+        var zone_districts = Object.keys(zones[region][zone]);
 
-    for (var s = 0; s < zone_districts.length; s++) {
+        for (var s = 0; s < zone_districts.length; s++) {
 
-        var target = sites_by_zones[zone_districts[s]];
+          var target = sites_by_zones[zone_districts[s]];
 
-        for (var i = 0; i < target.length; i++) {
+          for (var i = 0; i < target.length; i++) {
 
             var result = latLon2Coord(target[i]["latitude"], target[i]["longitude"])
 
@@ -521,80 +574,80 @@ function loadZoneSitesByOffsets(district) {
 
             insertZoneSiteByOffset(result[0], result[1], colors[pos], district + '_' + target[i]["facility_id"], district);
 
+          }
+
         }
 
-    }
+        if(__$("zone_label")){
 
-    if(__$("zone_label")){
+          __$("zone_label").innerHTML = zone + " Zone";
 
-        __$("zone_label").innerHTML = zone + " Zone";
+        }
 
-    }
+      }
 
-}
+      function loadDistrictSites(district) {
 
-function loadDistrictSites(district) {
+        var target = sites_by_zones[district];
 
-    var target = sites_by_zones[district];
+        for (var i = 0; i < target.length; i++) {
 
-    for (var i = 0; i < target.length; i++) {
+          var result = latLon2Coord(target[i]["latitude"], target[i]["longitude"])
 
-        var result = latLon2Coord(target[i]["latitude"], target[i]["longitude"])
+          var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
 
-        var colors = ["rgba(255,0,0,0.9)", "rgba(0,200,0,0.9)", "rgba(0,0,200,0.9)"];
+          var pos = 0;    // Math.round((Math.random() * 10)) % 3;
 
-        var pos = 0;    // Math.round((Math.random() * 10)) % 3;
+          insertSite(result[0], result[1], colors[pos], target[i]["facility_id"]);
 
-        insertSite(result[0], result[1], colors[pos], target[i]["facility_id"]);
+        }
 
-    }
+      }
 
-}
+      function unloadDistrictSites(district) {
 
-function unloadDistrictSites(district) {
+        var target = sites_by_zones[district];
 
-    var target = sites_by_zones[district];
+        var doc = __$("map").contentDocument;
 
-    var doc = __$("map").contentDocument;
+        var mw = doc.getElementById("malawi");
 
-    var mw = doc.getElementById("malawi");
+        for (var i = 0; i < target.length; i++) {
 
-    for (var i = 0; i < target.length; i++) {
-
-        if (doc.getElementById(target[i]["facility_id"])) {
+          if (doc.getElementById(target[i]["facility_id"])) {
 
             mw.removeChild(doc.getElementById(target[i]["facility_id"]));
 
+          }
+
         }
 
-    }
+      }
 
-}
+      function getDistrictOffsets() {
 
-function getDistrictOffsets() {
+        var svg = __$("map").contentDocument;
 
-    var svg = __$("map").contentDocument;
+        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+          "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
+          "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
 
-    var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
-        "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
-        "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"];
+        for (var i = 0; i < elements.length; i++) {
 
-    for (var i = 0; i < elements.length; i++) {
+          var element = svg.getElementById(elements[i]).getBBox();
 
-        var element = svg.getElementById(elements[i]).getBBox();
-
-        districtOffsets[elements[i]] = {
+          districtOffsets[elements[i]] = {
             'x': element.x,
             'y': element.y,
             'height': element.height,
             'width': element.width
+          }
         }
-    }
 
-}
+      }
 
-setDefaults();
+      setDefaults();
 
-</script>
-</body>
+    </script>
+  </body>
 </html>

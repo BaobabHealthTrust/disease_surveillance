@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'admin/index'
   get 'users/login'
   post 'users/login'
+  get 'users/new'
   post 'users/authenticate'
   post 'users/create'
   get 'users/logout' 

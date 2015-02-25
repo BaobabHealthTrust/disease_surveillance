@@ -1,14 +1,75 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>DiseaseSurveillanceDashboard</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html class="no-js">
 
-<%= yield %>
+  <head>
+    <title>Disease Surveillance</title>
+    <!-- Bootstrap -->
+    <link href="/assets/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="/assetsbootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
+    <link href="/assets/styles.css" rel="stylesheet" media="screen"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
 
-</body>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <%= User.find(session[:current_user_id]).id %> <i class="caret"></i>
+
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a tabindex="-1" href="#">Profile</a>
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a tabindex="-1" href="/users/logout/">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav">
+              <li class="active">
+                <a href="/">Home</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Users <i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#">New User</a></li>
+                  <li><a tabindex="-1" href="#">Edit User</a></li>
+                  <li><a tabindex="-1" href="#">Delete User</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <%= yield %>
+      <hr></hr>
+
+      <footer>
+        <p>&copy; Baobab Health 2015</p>
+      </footer>
+    </div>
+    <!--/.fluid-container-->
+    <script src="/assets/jquery-1.9.1.min.js"></script>
+    <script src="/assets/bootstrap.min.js"></script>
+    <script src="/assets/scripts.js"></script>
+  </body>
+
 </html>

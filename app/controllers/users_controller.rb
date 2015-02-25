@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user, :except => [:login, :authenticate, :create]
   
   def new
+    render :layout => "users_menu"
   end
 
   def create
@@ -39,13 +40,6 @@ class UsersController < ApplicationController
     render :layout => "users_menu"
   end
 
-  def logout
-    session[:current_user_id] = nil
-    User.current_user = nil
-    flash[:notice] = "You have successfully logged out"
-    redirect_to (users_login_path) and return
-  end
-  
   def authenticate
     @user = User.find(params[:username])
     unless @user.blank?
