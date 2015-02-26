@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'users/new'
   post 'users/authenticate'
   post 'users/create'
-  get 'users/logout' 
+  get 'users/logout'
+  get 'admin/national_dashboard'
+  get 'admin/regional_dashboard'
+  get 'admin/district_dashboard'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
