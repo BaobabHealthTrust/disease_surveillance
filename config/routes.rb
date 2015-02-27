@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get 'admin/national_dashboard'
   get 'admin/regional_dashboard'
   get 'admin/district_dashboard'
+  get 'admin/northern_zone'
+  get 'admin/central_zone'
+  get 'admin/southern_zone'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
