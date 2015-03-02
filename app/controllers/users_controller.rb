@@ -64,5 +64,20 @@ class UsersController < ApplicationController
     flash[:notice] = 'You have been logged out.'
     redirect_to (users_login_path) and return
   end
-  
+
+  def users_menu
+
+  end
+
+  def new_user
+    
+  end
+
+  def edit_user
+    
+  end
+
+  def delete_user
+    
+  end
 end

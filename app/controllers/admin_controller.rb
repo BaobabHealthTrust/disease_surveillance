@@ -28,5 +28,20 @@ class AdminController < ApplicationController
   def southern_zone
 
   end
-  
+
+  def diagnosis_settings_menu
+    
+  end
+
+  def add_diagnosis
+    
+  end
+
+  def remove_diagnosis
+
+  end
+
+  def view_diagnoses
+    
+  end
 end

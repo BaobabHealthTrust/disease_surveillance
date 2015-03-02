@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'users/login'
   post 'users/login'
   get 'users/new'
+  get 'users/new_user'
+  get 'users/edit_user'
+  get 'users/delete_user'
   post 'users/authenticate'
   post 'users/create'
   get 'users/logout'
@@ -14,6 +17,10 @@ Rails.application.routes.draw do
   get 'admin/northern_zone'
   get 'admin/central_zone'
   get 'admin/southern_zone'
+  get 'admin/diagnosis_settings_menu'
+  get 'admin/add_diagnosis'
+  get 'admin/view_diagnoses'
+  get 'admin/remove_diagnosis'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
