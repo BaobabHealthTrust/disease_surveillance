@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'users/authenticate'
   post 'users/create'
   get 'users/logout'
+  post 'users/update_user'
   get 'admin/national_dashboard'
   get 'admin/regional_dashboard'
   get 'admin/district_dashboard'

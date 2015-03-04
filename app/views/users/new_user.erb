@@ -19,6 +19,88 @@
           </li>
         </ul>
       </div>
+
+      <div class="span9" id="content">
+        <div class="row-fluid">
+          <%  if flash[:notice] %>
+            <div class="alert alert-success">
+              <button data-dismiss="alert" class="close" type="button">×</button>
+              <h4>Success</h4>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+          <%  if flash[:error] %>
+            <div class="alert alert-error">
+              <button data-dismiss="alert" class="close" type="button">×</button>
+              <h4>Error</h4>
+              <%= flash[:error] %>
+            </div>
+          <% end %>
+          <div class="block">
+            <div class="navbar navbar-inner block-header">
+              <div class="muted pull-left">New User</div>
+            </div>
+            <div class="block-content collapse in">
+              <div class="span12">
+                <form action="/users/create" class="form-horizontal" method="POST">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label">First Name<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="text" name="first_name" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Last Name<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="text" name="last_name" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Username<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="text" name="username" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Email<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="email" name="email" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Password<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="password" name="password" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">Retype Password<span class="required">*</span></label>
+                      <div class="controls">
+                        <input type="password" name="password_confirm" required="required" class="span4 m-wrap"/>
+                      </div>
+                    </div>
+
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn">Cancel</button>
+                    </div>
+                  </fieldset>
+                </form>
+
+              </div>
+            </div>
+          </div>
+          <!-- /block -->
+        </div>
+
+      </div>
+
     </div>
   </body>
 </html>
