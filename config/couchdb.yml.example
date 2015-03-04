@@ -4,8 +4,8 @@ development: &development
   port: 5984
   prefix: disease_surveillance_dashboard
   suffix: development
-  username:
-  password:
+  username: 
+  password: 
 
 test:
   <<: *development
