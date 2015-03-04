@@ -3,6 +3,11 @@
   <head>
     <title>New User</title>
     <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+      function confirmAction(){
+        $('#myModal').modal('show');
+      }
+    </script>
   </head>
   <body>
     <div class="row-fluid">
@@ -54,15 +59,15 @@
                   <tbody>
                     <% count = 0 %>
                     <% @active_users.each do |user| %>
-                    <tr>
-                      <td><%= count = count + 1 %></td>
-                      <td><%= user.first_name.capitalize %></td>
-                      <td><%= user.last_name.capitalize %></td>
-                      <td><%= user.username %></td>
-                      <td style="text-align: center;">
-                        <button class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td><%= count = count + 1 %></td>
+                        <td><%= user.first_name.capitalize %></td>
+                        <td><%= user.last_name.capitalize %></td>
+                        <td><%= user.username %></td>
+                        <td style="text-align: center;">
+                          <button onmousedown="confirmAction();"class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
+                        </td>
+                      </tr>
                     <% end %>
                   </tbody>
                 </table>
@@ -74,5 +79,27 @@
 
       </div>
     </div>
+
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">
+              Delete Confirmation
+            </h4>
+          </div>
+          <div class="modal-body">
+            <span style="text-align:center;">You are about to delete this user. You can not undo this action. Are you really <br />very sure?</span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+              <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CONFIRMATION POPUP END -->
   </body>
 </html>
