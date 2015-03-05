@@ -5,6 +5,7 @@ config/couchdb.yml
 *~
 Gemfile.lock
 log/*
+nbproject/
 tmp/*
 .idea/*
 .ruby-version

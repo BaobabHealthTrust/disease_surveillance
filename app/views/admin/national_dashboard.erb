@@ -576,15 +576,12 @@
           if (svg.getElementById(elements[i])) {
 
             svg.getElementById(elements[i]).onmouseover = function () {
-
-              //this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
-
+              this.setAttribute("title", this.id.capitalize())
+              this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
             }
 
             svg.getElementById(elements[i]).onmouseout = function () {
-
-              //this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
-
+              this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
             }
 
             svg.getElementById(elements[i]).onclick = function () {
@@ -1060,6 +1057,9 @@
 
       setDefaults();
 
+      String.prototype.capitalize = function(){
+        return this.charAt(0).toUpperCase() + this.slice(1)
+      }
     </script>
   </body>
 </html>
