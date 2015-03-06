@@ -15,6 +15,9 @@ class Patient < CouchRest::Model::Base
   property :address1, String
   property :address2, String
   property :city_village, String
-  property :county_district, String
+  property :home_ta, String
+  property :home_village, String
+  property :current_district, String
+  property :home_district, String
   timestamps!
 end

@@ -567,27 +567,27 @@
 
         }
 
-        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+        /*var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
           "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
           "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"]
-
-        for (var i = 0; i < elements.length; i++) {
-
-          if (svg.getElementById(elements[i])) {
-
-            svg.getElementById(elements[i]).onmouseover = function () {
-
-              //this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
-
-            }
-
-            svg.getElementById(elements[i]).onmouseout = function () {
-
-              //this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+          */
+        var elements = {"MW.CT":"Chitipa", "MW.1011":"Karonga", "MW.RU":"Rumphi", "MW.NA":"Nkhatabay", "MW.MZ":"Mzuzu", "MW.6970":"Likoma"}
+        for (var districtID in elements) {
+          if (svg.getElementById(districtID)) {
+            svg.getElementById(districtID).onmouseover = function () {
+              currentDistrict = elements[this.id];
+              this.setAttribute("title", currentDistrict.capitalize())
+              this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
 
             }
 
-            svg.getElementById(elements[i]).onclick = function () {
+            svg.getElementById(districtID).onmouseout = function () {
+
+              this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+
+            }
+
+            svg.getElementById(districtID).onclick = function () {
 
               //drawBorder(this.id);
 
@@ -596,7 +596,7 @@
           }
         }
 
-        // loadSites();
+        loadSites();
       }
 
       function insertSite(x, y, color, id) {
@@ -618,7 +618,7 @@
 
         circle.setAttribute("stroke", "black");
 
-        mw.appendChild(circle);
+        //mw.appendChild(circle);
       }
 
       function insertSiteByOffset(x, y, color, id, district) {
@@ -643,7 +643,7 @@
 
         circle.setAttribute("stroke", "black");
 
-        mw.appendChild(circle);
+        //mw.appendChild(circle);
       }
 
       function insertZoneSiteByOffset(x, y, color, id, district) {
@@ -668,7 +668,7 @@
 
         circle.setAttribute("stroke", "black");
 
-        mw.appendChild(circle);
+        //mw.appendChild(circle);
       }
 
       function loadSites() {
