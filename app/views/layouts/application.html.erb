@@ -13,6 +13,15 @@
     <![endif]-->
     <script src="/assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <%= csrf_meta_tags %>
+    <style>
+      .separator{
+        font-weight: bold;
+        font-size: 40pt;
+        padding-left:1em;
+        padding-right: 1em;
+        color: red;
+}
+    </style>
   </head>
 
   <body>
@@ -93,8 +102,8 @@
               <span style="color: blue; font-size: 0.4em;">Live Updates</span>
             </td>
             <td style="background-color: blue; color: white; line-height: 2em;">
-              <marquee id="news" direction="left" style="float: left; font-size: 36px;">
-                No Announcements
+              <marquee id="news" direction="left" style="float: left; font-size: 32px;">
+                <%=  @headlines.to_s.html_safe -%>
               </marquee>
             </td>
             <td style="background-color: #000; color: #cfe7f5; font-size: 24px; padding: 5px; text-align:center">
