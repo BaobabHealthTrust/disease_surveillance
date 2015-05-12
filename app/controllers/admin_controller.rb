@@ -125,4 +125,9 @@ class AdminController < ApplicationController
     end
     @headlines = @xml.map{|x|x["title"]}.join("<span class='separator'>|</span>")
   end
+
+  def feed
+    render :template => '/admin/feed.rss.builder', :layout => false
+  end
+  
 end

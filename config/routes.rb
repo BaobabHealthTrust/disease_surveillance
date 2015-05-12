@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'admin/add_diagnosis'
   get 'admin/view_diagnoses'
   get 'admin/remove_diagnosis'
+  get 'admin/feed'
+  post 'admin/feed'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
