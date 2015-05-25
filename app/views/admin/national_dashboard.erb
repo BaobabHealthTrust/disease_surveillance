@@ -334,6 +334,12 @@
           ]
         });
       });
+
+      function resizeIframe(obj){
+        console.log(obj)
+        obj.height = obj.scrollHeight  + "px";
+        obj.width = obj.scrollWidth + "px";
+      }
     </script>
     <style>
       body{
@@ -353,15 +359,15 @@
   </head>
   <body onresize="resize()" onload="resize()">
     <div class="row-fluid" style="width: 23%;">
-      <div class="block">
+      <div class="block" style="height: 78vh;">
         <div class="navbar navbar-inner block-header">
           <div class="muted pull-left" id="national_label">
             MALAWI
           </div>
         </div>
-        <div class="block-content collapse in">
+        <div class="block-content collapse in" style="height:100%;">
           <div id="c_map">
-            <object id="map" type="image/svg+xml" data="/assets/Malawi.svg" style="height: 100%; width: 100%;"></object>
+            <object onload="resizeIframe(this)" id="map" type="image/svg+xml" data="/assets/Malawi.svg" style="height:70vh;"></object>
           </div>
         </div>
       </div>

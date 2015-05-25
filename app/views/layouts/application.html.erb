@@ -95,19 +95,19 @@
     <div class="navbar navbar-fixed-bottom">
       <div class="navbar-inner">
       <div style="border: 1px solid #999; margin: 10px; border-radius: 10px;vertical-align: middle; overflow: hidden;">
-        <table width="100%" style="margin: 0px; height: 50px;" cellpadding="0" cellspacing="0">
+        <table width="100%" style="margin: 0px; height: 20px;" cellpadding="0" cellspacing="0">
           <tr>
-            <td style="color: red; font-size: 28px; padding-left: 10px; padding-right: 10px;
+            <td style="color: red; font-size: 28px; padding-left: 10px; padding-right: 10px; padding-top: 7px;
                 font-style: italic; font-weight: bold; text-align: center; background-color: #fff;">
               NEWS<br />
               <span style="color: blue; font-size: 0.4em;">Live Updates</span>
             </td>
             <td style="background-color: blue; color: white; line-height: 2em;">
               <marquee id="news" direction="left" style="float: left; font-size: 32px;">
-                <%=  @headlines.to_s.html_safe -%>
+                <%= feeds.to_s.html_safe -%>
               </marquee>
             </td>
-            <td style="background-color: #000; color: #cfe7f5; font-size: 24px; padding: 5px; text-align:center">
+            <td style="min-width: 200px; background-color: #000; color: #cfe7f5; font-size: 24px; padding: 5px; text-align:center">
               Kamuzu Central Hospital
             </td>
           </tr>
