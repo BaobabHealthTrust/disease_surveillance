@@ -4,8 +4,23 @@
     <title>New User</title>
     <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-      function confirmAction(){
+       var currentUsername = '';
+      function confirmAction(obj){
+        currentUsername = obj.getAttribute("username")
         $('#myModal').modal('show');
+      }
+
+      function deleteUser(){
+        jQuery.ajax({
+          type: "POST",
+          url: "/users/delete_me",
+          data: "username=" + currentUsername,
+          success: function(){
+            activeRow = document.getElementById(currentUsername);
+            if (activeRow) activeRow.parentNode.removeChild(activeRow);
+          }
+
+        });
       }
     </script>
   </head>
@@ -59,13 +74,17 @@
                   <tbody>
                     <% count = 0 %>
                     <% @active_users.each do |user| %>
-                      <tr>
+                      <tr id="<%= user.username %>">
                         <td><%= count = count + 1 %></td>
                         <td><%= user.first_name.capitalize %></td>
                         <td><%= user.last_name.capitalize %></td>
                         <td><%= user.username %></td>
                         <td style="text-align: center;">
-                          <button onmousedown="confirmAction();"class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
+                          <% if (user.username == session[:current_user_id]) %>
+                            <button class="disabled btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
+                          <% else %>
+                            <button username="<%= user.username %>" onmousedown="confirmAction(this);"class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
+                          <% end %>
                         </td>
                       </tr>
                     <% end %>
@@ -93,7 +112,7 @@
           <div class="modal-body">
             <span style="text-align:center;">You are about to delete this user. You can not undo this action. Are you really <br />very sure?</span>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+              <button type="button" class="btn btn-primary" onclick="deleteUser();" data-dismiss="modal">Okay</button>
               <button type="button" class="btn" data-dismiss="modal">Cancel</button>
             </div>
           </div>

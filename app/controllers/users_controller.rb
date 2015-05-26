@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:authenticate, :create]
+  skip_before_action :verify_authenticity_token, :only => [:authenticate, :create, :delete_me]
   before_filter :authenticate_user, :except => [:login, :authenticate, :create]
   
   def new
@@ -104,5 +104,12 @@ class UsersController < ApplicationController
 
   def delete_user
     @active_users = User.by_active.key(true)
+  end
+
+  def delete_me
+    user = User.find(params[:username])
+    user.active = false
+    user.save
+    render :text => true and return
   end
 end
