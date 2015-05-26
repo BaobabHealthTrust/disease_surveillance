@@ -112,4 +112,12 @@ class UsersController < ApplicationController
     user.save
     render :text => true and return
   end
+
+  def my_profile
+    @user = User.find(session[:current_user_id])
+  end
+
+  def field_edit
+    
+  end
 end

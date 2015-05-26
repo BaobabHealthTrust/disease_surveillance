@@ -4,23 +4,8 @@
     <title>New User</title>
     <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-       var currentUsername = '';
-      function confirmAction(obj){
-        currentUsername = obj.getAttribute("username")
-        $('#myModal').modal('show');
-      }
-
-      function deleteUser(){
-        jQuery.ajax({
-          type: "POST",
-          url: "/users/delete_me",
-          data: "username=" + currentUsername,
-          success: function(){
-            activeRow = document.getElementById(currentUsername);
-            if (activeRow) activeRow.parentNode.removeChild(activeRow);
-          }
-
-        });
+      function editField(fieldName){
+        window.location = "/users/field_edit?field=" + fieldName;
       }
     </script>
   </head>
@@ -34,10 +19,10 @@
           <li>
             <a href="/users/edit_user"><i class="icon-chevron-right"></i> Edit User</a>
           </li>
-          <li class="active">
+          <li>
             <a href="/users/delete_user"><i class="icon-chevron-right"></i> Delete User</a>
           </li>
-          <li>
+          <li class="active">
             <a href="/users/my_profile"><i class="icon-chevron-right"></i> My Profile</a>
           </li>
         </ul>
@@ -60,37 +45,35 @@
           <% end %>
           <div class="block">
             <div class="navbar navbar-inner block-header">
-              <div class="muted pull-left">Delete User Menu</div>
+              <div class="muted pull-left">My Profile</div>
             </div>
             <div class="block-content collapse in">
               <div class="span12">
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th>First Name</th>
+                      <td><%= @user.first_name.capitalize %></td>
+                      <td><button class="btn btn-block btn-primary" onclick="editField('first_name')"><i class="icon-pencil icon-white"></i> Edit</button></td>
+                    </tr>
+                    <tr>
                       <th>Last Name</th>
+                      <td><%= @user.last_name.capitalize %></td>
+                      <td><button class="btn btn-block btn-primary" onclick="editField('last_name')"><i class="icon-pencil icon-white"></i> Edit</button></td>
+                    </tr>
+                    <tr>
                       <th>Username</th>
-                      <th style="text-align: center; width:12%;">Action</th>
+                      <td><%= @user.username %></td>
+                      <td><button class="btn btn-block btn-primary" onclick="editField('username')"><i class="icon-pencil icon-white"></i> Edit</button></td>
+                    </tr>
+                    <tr>
+                      <th>Password</th>
+                      <td>*********</td>
+                      <td><button class="btn btn-block btn-primary" onclick="editField('password')"><i class="icon-pencil icon-white"></i> Edit</button></td>
                     </tr>
                   </thead>
                   <tbody>
-                    <% count = 0 %>
-                    <% @active_users.each do |user| %>
-                      <tr id="<%= user.username %>">
-                        <td><%= count = count + 1 %></td>
-                        <td><%= user.first_name.capitalize %></td>
-                        <td><%= user.last_name.capitalize %></td>
-                        <td><%= user.username %></td>
-                        <td style="text-align: center;">
-                          <% if (user.username == session[:current_user_id]) %>
-                            <button class="disabled btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
-                          <% else %>
-                            <button username="<%= user.username %>" onmousedown="confirmAction(this);"class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
-                          <% end %>
-                        </td>
-                      </tr>
-                    <% end %>
+
                   </tbody>
                 </table>
               </div>

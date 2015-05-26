@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'users/authenticate'
   post 'users/create'
   post 'users/delete_me'
+  get 'users/my_profile'
+  get 'users/field_edit'
   get 'users/logout'
   post 'users/update_user'
   get 'admin/national_dashboard'
