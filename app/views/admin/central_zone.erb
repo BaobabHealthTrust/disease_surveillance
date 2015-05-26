@@ -334,6 +334,12 @@
           ]
         });
       });
+
+      function resizeIframe(obj){
+        console.log(obj)
+        obj.height = obj.scrollHeight  + "vh";
+        obj.width = obj.scrollWidth + "vh";
+      }
     </script>
     <style>
       body{
@@ -351,17 +357,17 @@
       }
     </style>
   </head>
-  <body onresize="resize()" onload="resize()">
-    <div class="row-fluid" style="width: 23%;">
-      <div class="block">
+  <body>
+    <div class="row-fluid" style="width: 24%;">
+      <div class="block" style="height: 78vh;">
         <div class="navbar navbar-inner block-header">
           <div class="muted pull-left" id="national_label">
             CENTRAL ZONE
           </div>
         </div>
-        <div class="block-content collapse in">
+        <div class="block-content collapse in" style="height:100%;">
           <div id="c_map">
-            <object id="map" type="image/svg+xml" data="/assets/mw/centre.svg" style="height: 100%; width: 100%;"></object>
+            <object onload="resizeIframe(this)" id="map" type="image/svg+xml" data="/assets/mw/centre.svg" style="height:70vh; width: 100%;"></object>
           </div>
         </div>
       </div>
@@ -500,7 +506,8 @@
       </div>
       <!-- /block -->
     </div>
-
+    <div class="row-fluid" style="width: 100%; position: relative;"><%=("<br />" * 5).html_safe %>
+    </div>
 
     <script>
 
