@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:authenticate, :create, :delete_me]
+  skip_before_action :verify_authenticity_token, :only => [:authenticate, :create, :delete_me, :update_field]
   before_filter :authenticate_user, :except => [:login, :authenticate, :create]
   
   def new
@@ -118,6 +118,42 @@ class UsersController < ApplicationController
   end
 
   def field_edit
+    @user = User.find(session[:current_user_id])
+  end
+
+  def update_field
+    user = User.find(session[:current_user_id])
+    if (params[:field] == 'first_name')
+      user.first_name = params[:first_name]
+    end
+
+    if (params[:field] == 'last_name')
+      user.last_name = params[:last_name]
+    end
+
+    if (params[:field] == 'username')
+      user.username = params[:username]
+      existing_user = User.find(params[:username])
+      unless existing_user.blank?
+        flash[:error] = "Username already in use"
+        redirect_to :action => "field_edit", :field => params[:field]
+      end
+    end
+
+    if (params[:field] == 'email')
+      user.email = params[:email]
+    end
     
+    if (params[:field] == 'password')
+      
+    end
+
+    if user.save
+      flash[:notice] = "You have succeffully edited your first name"
+      redirect_to :action => "my_profile"
+    else
+      flash[:error] = "Unable to save your changes"
+      redirect_to :action => "field_edit", :field => params[:field]
+    end
   end
 end

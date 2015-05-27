@@ -4,7 +4,7 @@
     <title>New User</title>
     <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-       var currentUsername = '';
+      var currentUsername = '';
       function confirmAction(){
         $('#myModal').modal('show');
       }
@@ -55,15 +55,16 @@
             </div>
             <div class="block-content collapse in">
               <div class="span12">
-                <form action="#" class="form-horizontal" method="POST">
+                <form action="/users/update_field" class="form-horizontal" method="POST">
                   <fieldset>
 
                     <% if params[:field] == 'first_name' %>
                       <div class="control-group">
                         <label class="control-label">First Name<span class="required">*</span></label>
                         <div class="controls">
-                          <input type="text" name="first_name" required="required" class="span4 m-wrap"/>
+                          <input type="text" value="<%= @user.first_name %>" name="first_name" required="required" class="span4 m-wrap"/>
                         </div>
+                        <%= hidden_field_tag("field", 'first_name') %>
                       </div>
                     <% end %>
 
@@ -71,27 +72,30 @@
                       <div class="control-group">
                         <label class="control-label">Last Name<span class="required">*</span></label>
                         <div class="controls">
-                          <input type="text" name="last_name" required="required" class="span4 m-wrap"/>
+                          <input type="text" value="<%= @user.last_name %>" name="last_name" required="required" class="span4 m-wrap"/>
                         </div>
                       </div>
+                      <%= hidden_field_tag("field", 'last_name') %>
                     <% end %>
 
                     <% if params[:field] == 'username' %>
                       <div class="control-group">
                         <label class="control-label">Username<span class="required">*</span></label>
                         <div class="controls">
-                          <input type="text" name="username" required="required" class="span4 m-wrap"/>
+                          <input type="text" value="<%= @user.username %>" name="username" required="required" class="span4 m-wrap"/>
                         </div>
                       </div>
+                      <%= hidden_field_tag("field", 'username') %>
                     <% end %>
 
                     <% if params[:field] == 'email' %>
                       <div class="control-group">
                         <label class="control-label">Email<span class="required">*</span></label>
                         <div class="controls">
-                          <input type="email" name="email" required="required" class="span4 m-wrap"/>
+                          <input type="email" value="<%= @user.email %>" name="email" required="required" class="span4 m-wrap"/>
                         </div>
                       </div>
+                      <%= hidden_field_tag("field", 'email') %>
                     <% end %>
 
                     <% if params[:field] == 'password' %>
@@ -108,6 +112,7 @@
                           <input type="password" name="password_confirm" required="required" class="span4 m-wrap"/>
                         </div>
                       </div>
+                      <%= hidden_field_tag("field", 'password') %>
                     <% end %>
 
                     <div class="form-actions">

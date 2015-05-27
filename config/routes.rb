@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'users/delete_me'
   get 'users/my_profile'
   get 'users/field_edit'
+  post 'users/update_field'
   get 'users/logout'
   post 'users/update_user'
   get 'admin/national_dashboard'
