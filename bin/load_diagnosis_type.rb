@@ -3,7 +3,7 @@ def load_diagnoses
   sg_fever_diagnoses = File.read("#{Rails.root}/data/sg_fever.json")
   sg_fever_diagnoses = JSON.parse(sg_fever_diagnoses)
   sg_fever_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_FEVER"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -18,7 +18,7 @@ def load_diagnoses
   sg_uri_diagnoses = File.read("#{Rails.root}/data/sg_uri.json")
   sg_uri_diagnoses = JSON.parse(sg_uri_diagnoses)
   sg_uri_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_URI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -33,7 +33,7 @@ def load_diagnoses
   sg_lri_diagnoses = File.read("#{Rails.root}/data/sg_lri.json")
   sg_lri_diagnoses = JSON.parse(sg_lri_diagnoses)
   sg_lri_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_LRI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -48,7 +48,7 @@ def load_diagnoses
   sg_ri_diagnoses = File.read("#{Rails.root}/data/sg_ri.json")
   sg_ri_diagnoses = JSON.parse(sg_ri_diagnoses)
   sg_ri_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_RI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -63,7 +63,7 @@ def load_diagnoses
   sg_ugi_diagnoses = File.read("#{Rails.root}/data/sg_ugi.json")
   sg_ugi_diagnoses = JSON.parse(sg_ugi_diagnoses)
   sg_ugi_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_UGI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -78,7 +78,7 @@ def load_diagnoses
   sg_lgi_diagnoses = File.read("#{Rails.root}/data/sg_lgi.json")
   sg_lgi_diagnoses = JSON.parse(sg_lgi_diagnoses)
   sg_lgi_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_LGI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -93,7 +93,7 @@ def load_diagnoses
   sg_gi_diagnoses = File.read("#{Rails.root}/data/sg_gi.json")
   sg_gi_diagnoses = JSON.parse(sg_gi_diagnoses)
   sg_gi_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "SG_GI"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -108,7 +108,7 @@ def load_diagnoses
   ncd_diagnoses = File.read("#{Rails.root}/data/ncd.json")
   ncd_diagnoses = JSON.parse(ncd_diagnoses)
   ncd_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "NCD"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
@@ -123,7 +123,7 @@ def load_diagnoses
   idsr_dz_diagnoses = File.read("#{Rails.root}/data/idsr_dz.json")
   idsr_dz_diagnoses = JSON.parse(idsr_dz_diagnoses)
   idsr_dz_diagnoses.each do |diagnosis|
-    diagnosis_exists = DiagnosisCategory.by_full_name(:key => diagnosis)
+    diagnosis_exists = DiagnosisCategory.by_full_name_and_category.keys([["#{diagnosis}", "IDSR_DZ"]])
     if diagnosis_exists.blank?
       DiagnosisCategory.create({
           :full_name => diagnosis,
