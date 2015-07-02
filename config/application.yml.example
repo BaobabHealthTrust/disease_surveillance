@@ -1,0 +1,11 @@
+production:
+ opd.address: localhost:3000
+
+development:
+ opd.address: localhost:3000
+
+test: &TEST
+ opd.address: no
+
+cucumber:
+  <<: *TEST

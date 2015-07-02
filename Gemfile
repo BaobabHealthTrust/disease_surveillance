@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 gem 'rails', '4.1.0'
 gem 'sqlite3'
 gem 'couchrest_model'
@@ -11,4 +12,5 @@ gem 'jbuilder', '~> 2.0'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'passenger', '4.0.38'
 gem 'nokogiri'
+gem 'settingslogic', '2.0.9'
 #gem 'passenger'

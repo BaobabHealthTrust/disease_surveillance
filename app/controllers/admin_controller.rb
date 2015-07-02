@@ -51,5 +51,20 @@ class AdminController < ApplicationController
   def feed
     render :template => '/admin/feed.rss.builder', :layout => false
   end
-  
+
+  def pull_opd_diagnoses
+          remote_app_address = Settings["opd.address"]
+          uri = "http://#{remote_app_address}/location/disease_surveillance_api"
+          date_params =  {
+            "start_date" => start_date,
+            "end_date" => end_date
+            }
+
+          diagnoses = RestClient.post(uri, date_params) rescue []
+          remote_result = JSON.parse(diagnoses) rescue []
+  end
+
+  def concept_groups
+    
+  end
 end
