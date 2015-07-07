@@ -1,5 +1,6 @@
 require 'nokogiri'
 class AdminController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   def home
     
   end
@@ -160,4 +161,20 @@ class AdminController < ApplicationController
   def concept_groups
     
   end
+
+  def observations_by_diagnosis
+    diagnosis_obs = Observation.by_diagnosis_full_name(:key => params[:diagnosis]).all
+    patient_data = {}
+    count = 1
+    diagnosis_obs.each do |obs|
+      patient_data[count] = {}
+      patient_data[count]["national_id"] = obs.national_id
+      patient_data[count]["gender"] = obs.gender
+      patient_data[count]["age"] = obs.age
+      patient_data[count]["obs_date"] = obs.obs_date.to_date.strftime("%d/%b/%Y")
+      count = count + 1
+    end
+    render :text => patient_data.to_json.html_safe and return
+  end
+  
 end
