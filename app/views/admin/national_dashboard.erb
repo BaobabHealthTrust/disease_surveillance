@@ -11,8 +11,8 @@
     <script type="text/javascript" src="/assets/data/district_offsets.js"></script>   
 
     <script type="text/javascript">
-     // console.log("<%= @latest_obs_dates.to_json %>")
-     latest_obs = eval('<%= @latest_obs_dates.to_json.html_safe %>')
+      // console.log("<%= @latest_obs_dates.to_json %>")
+      latest_obs = eval('<%= @latest_obs_dates.to_json.html_safe %>')
       console.log(latest_obs);
       $(function () {
         $('#diagnosis_one').highcharts({
@@ -343,6 +343,14 @@
         obj.height = obj.scrollHeight  + "px";
         obj.width = obj.scrollWidth + "px";
       }
+
+      function viewPatients(obj){
+        diagnosis = obj.getAttribute("diagnosis");
+        console.log(diagnosis)
+        document.getElementById('diagnosis-name').innerHTML = diagnosis;
+        $('#myModal').modal('show');
+        document.getElementsByClassName('modal-title')[0].innerHTML = diagnosis;
+      }
     </script>
     <style>
       body{
@@ -394,7 +402,7 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-             SG URI
+              SG URI
             </div>
           </div>
           <div class="block-content collapse in">
@@ -462,26 +470,26 @@
       </div>
     </div>
 
-    <div class="row-fluid" style="position: absolute; left:25%; top:467px; width:74.3%;">
+    <div class="row-fluid" style="position: absolute; left:25%; bottom: 70px; width:74.3%;">
       <!-- block -->
       <div class="block">
         <div class="navbar navbar-inner block-header">
           <div class="muted pull-left">Cases</div>
         </div>
         <div class="block-content collapse in">
-          <div style="width:100%; height: 270px; overflow: auto;">
+          <div style="width:100%; height: 160px; overflow: auto;">
             <table class="table table-bordered">
               <tbody>
                 <% @data.each do |row| %>
-                <tr>
-                  <% row.each do |values| %>
-                    <%
+                  <tr>
+                    <% row.each do |values| %>
+                      <%
                       diagnosis = values[0]
                       count = values[1]
                     %>
-                    <td><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
-                  <% end %>
-                </tr>
+                      <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
+                    <% end %>
+                  </tr>
                 <% end %>
               </tbody>
             </table>
@@ -492,9 +500,77 @@
       <!-- /block -->
 
     </div>
-    <div class="row-fluid" style="width: 100%; position: relative;"><%=("<br />" * 5).html_safe %>
-    </div>
+    <!--<div class="row-fluid" style="width: 100%; position: relative;"><%=("<br />" * 5).html_safe %>
+    </div>-->
 
+
+
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">
+              PATIENTS VIEW
+            </h4>
+          </div>
+          <div class="modal-body">
+            <span id="my_modal_content" style="">
+
+              <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                  <div class="navbar navbar-inner block-header">
+                    <div class="pull-left" id="diagnosis-name">Test Diagnosis</div>
+                  </div>
+                  <div class="block-content collapse in">
+                    <div class="span12">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>National ID</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- /block -->
+              </div>
+
+            </span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CONFIRMATION POPUP END -->
 
     <script>
 
@@ -1052,5 +1128,6 @@
       setDefaults();
       
     </script>
+
   </body>
 </html>
