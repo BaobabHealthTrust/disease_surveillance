@@ -11,6 +11,9 @@
     <script type="text/javascript" src="/assets/data/district_offsets.js"></script>   
 
     <script type="text/javascript">
+     // console.log("<%= @latest_obs_dates.to_json %>")
+     latest_obs = eval('<%= @latest_obs_dates.to_json.html_safe %>')
+      console.log(latest_obs);
       $(function () {
         $('#diagnosis_one').highcharts({
           chart: {
@@ -27,7 +30,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -58,8 +61,8 @@
           series: [
             {
               showInLegend: false,  
-              name: 'Brucellosis',
-              data: [7.0, 6.9, 9.5, 14.5]
+              name: 'SG FEVER',
+              data: eval('<%= @sg_fever.to_json.html_safe %>')
             }
           ]
         });
@@ -81,7 +84,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -113,7 +116,7 @@
             {
               showInLegend: false,
               name: 'Food Poisoning',
-              data: [5.0, 8.9, 4.5, 3.5]
+              data: eval('<%= @sg_uri.to_json.html_safe %>')
             }
           ]
         });
@@ -135,7 +138,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -167,7 +170,7 @@
             {
               showInLegend: false,
               name: 'Anthrax',
-              data: [8.0, 5.9, 8.5, 4.5]
+              data: eval('<%= @sg_lri.to_json.html_safe %>')
             }
           ]
         });
@@ -189,7 +192,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -221,7 +224,7 @@
             {
               showInLegend: false,
               name: 'Anthrax',
-              data: [9.0, 6, 2.5, 1.5]
+              data: eval('<%= @sg_ri.to_json.html_safe %>')
             }
           ]
         });
@@ -243,7 +246,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -275,7 +278,7 @@
             {
               showInLegend: false,
               name: 'Scarlet fever',
-              data: [2.0, 4, 6.5, 9.5]
+              data: eval('<%= @sg_ugi.to_json.html_safe %>')
             }
           ]
         });
@@ -297,7 +300,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -329,7 +332,7 @@
             {
               showInLegend: false,
               name: 'Acute encephalitis',
-              data: [10.0, 7.4, 4, 2.5]
+              data: eval('<%= @sg_lgi.to_json.html_safe %>')
             }
           ]
         });
@@ -378,7 +381,7 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Brucellosis
+              SG FEVER
             </div>
           </div>
           <div class="block-content collapse in">
@@ -391,7 +394,7 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Food poisoning
+             SG URI
             </div>
           </div>
           <div class="block-content collapse in">
@@ -404,7 +407,7 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Anthrax
+              SG LRI
             </div>
           </div>
           <div class="block-content collapse in">
@@ -426,7 +429,7 @@
           </div>
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Acute meningitis
+              SG RI
             </div>
           </div>
         </div>
@@ -439,7 +442,7 @@
           </div>
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Scarlet fever
+              SG_UGI
             </div>
           </div>
         </div>
@@ -452,7 +455,7 @@
           </div>
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Acute encephalitis
+              SG_LGI
             </div>
           </div>
         </div>
@@ -466,39 +469,20 @@
           <div class="muted pull-left">Cases</div>
         </div>
         <div class="block-content collapse in">
-          <div style="width:100%; height: 30vh;">
+          <div style="width:100%; height: 270px; overflow: auto;">
             <table class="table table-bordered">
               <tbody>
+                <% @data.each do |row| %>
                 <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Rabies</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Food Poisoning</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Brucellosis</a></td>
+                  <% row.each do |values| %>
+                    <%
+                      diagnosis = values[0]
+                      count = values[1]
+                    %>
+                    <td><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
+                  <% end %>
                 </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Smallpox</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Acute meningitis</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Enteric fever</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Tuberculosis</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Tetanus</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> SARS</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Diabetes</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Hypertension</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Whooping cough</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Measles</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Accidents</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Yellow fever</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Influenza</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Diphtheria</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Leprosy</a></td>
-                </tr>
+                <% end %>
               </tbody>
             </table>
           </div>

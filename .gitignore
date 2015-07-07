@@ -2,6 +2,7 @@
 *.swp
 *.swo
 config/couchdb.yml
+config/application.yml
 *~
 Gemfile.lock
 log/*

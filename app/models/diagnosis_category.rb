@@ -7,17 +7,8 @@ class DiagnosisCategory < CouchRest::Model::Base
 
   design do
     view :by_short_name
-  end
-
-  design do
     view :by_full_name
-  end
-  
-  design do
     view :by_full_name_and_category
   end
   
-  design do
-    view :by_category
-  end
 end
