@@ -8,15 +8,17 @@
     <script type="text/javascript" src="/assets/data/districts.js"></script>
     <script type="text/javascript" src="/assets/data/sites_by_zones.js"></script>
     <script type="text/javascript" src="/assets/data/zones.js"></script>
-    <script type="text/javascript" src="/assets/data/district_offsets.js"></script>   
+    <script type="text/javascript" src="/assets/data/district_offsets.js"></script>
 
     <script type="text/javascript">
+      latest_obs = eval('<%= @latest_obs_dates.to_json.html_safe %>')
       $(function () {
         $('#diagnosis_one').highcharts({
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -27,7 +29,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -41,7 +43,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -57,9 +59,9 @@
           },
           series: [
             {
-              showInLegend: false,  
-              name: 'Brucellosis',
-              data: [7.0, 6.9, 9.5, 14.5]
+              showInLegend: false,
+              name: 'SG FEVER',
+              data: eval('<%= @sg_fever.to_json.html_safe %>')
             }
           ]
         });
@@ -70,7 +72,8 @@
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -81,7 +84,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -95,7 +98,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -112,8 +115,8 @@
           series: [
             {
               showInLegend: false,
-              name: 'Food Poisoning',
-              data: [5.0, 8.9, 4.5, 3.5]
+              name: 'SG URI',
+              data: eval('<%= @sg_uri.to_json.html_safe %>')
             }
           ]
         });
@@ -124,7 +127,8 @@
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -135,7 +139,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -149,7 +153,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -166,8 +170,8 @@
           series: [
             {
               showInLegend: false,
-              name: 'Anthrax',
-              data: [8.0, 5.9, 8.5, 4.5]
+              name: 'SG LRI',
+              data: eval('<%= @sg_lri.to_json.html_safe %>')
             }
           ]
         });
@@ -178,7 +182,8 @@
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -189,7 +194,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -203,7 +208,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -220,8 +225,8 @@
           series: [
             {
               showInLegend: false,
-              name: 'Anthrax',
-              data: [9.0, 6, 2.5, 1.5]
+              name: 'SG RI',
+              data: eval('<%= @sg_ri.to_json.html_safe %>')
             }
           ]
         });
@@ -232,7 +237,8 @@
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -243,7 +249,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -257,7 +263,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -274,8 +280,8 @@
           series: [
             {
               showInLegend: false,
-              name: 'Scarlet fever',
-              data: [2.0, 4, 6.5, 9.5]
+              name: 'SG UGI',
+              data: eval('<%= @sg_ugi.to_json.html_safe %>')
             }
           ]
         });
@@ -286,7 +292,8 @@
           chart: {
             type: 'line',
             marginRight: 130,
-            marginBottom: 25
+            marginBottom: 25,
+            marginLeft: 32
           },
           title: {
             text: '',
@@ -297,7 +304,7 @@
             x: -20
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr']
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
           },
           yAxis: {
             title: {
@@ -311,7 +318,7 @@
           },
           tooltip: {
             formatter: function() {
-              return '' + this.x + ' = <b>' + this.y + '</b> cases';
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
             }
           },
           credits: {
@@ -328,12 +335,218 @@
           series: [
             {
               showInLegend: false,
-              name: 'Acute encephalitis',
-              data: [10.0, 7.4, 4, 2.5]
+              name: 'SG LGI',
+              data: eval('<%= @sg_lgi.to_json.html_safe %>')
             }
           ]
         });
       });
+
+      $(function () {
+        $('#diagnosis_seven').highcharts({
+          chart: {
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 25,
+            marginLeft: 32
+          },
+          title: {
+            text: '',
+            x: -20 //center
+          },
+          subtitle: {
+            text: '',
+            x: -20
+          },
+          xAxis: {
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
+          },
+          yAxis: {
+            title: {
+              text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+              }]
+          },
+          tooltip: {
+            formatter: function() {
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'bottom',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+          },
+          series: [
+            {
+              showInLegend: false,
+              name: 'SG GI',
+              data: eval('<%= @sg_gi.to_json.html_safe %>')
+            }
+          ]
+        });
+      });
+
+      $(function () {
+        $('#diagnosis_eight').highcharts({
+          chart: {
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 25,
+            marginLeft: 32
+          },
+          title: {
+            text: '',
+            x: -20 //center
+          },
+          subtitle: {
+            text: '',
+            x: -20
+          },
+          xAxis: {
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
+          },
+          yAxis: {
+            title: {
+              text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+              }]
+          },
+          tooltip: {
+            formatter: function() {
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'bottom',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+          },
+          series: [
+            {
+              showInLegend: false,
+              name: 'NCD',
+              data: eval('<%= @ncd.to_json.html_safe %>')
+            }
+          ]
+        });
+      });
+
+      $(function () {
+        $('#diagnosis_nine').highcharts({
+          chart: {
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 25,
+            marginLeft: 32
+          },
+          title: {
+            text: '',
+            x: -20 //center
+          },
+          subtitle: {
+            text: '',
+            x: -20
+          },
+          xAxis: {
+            categories: eval('<%= @latest_obs_dates.to_json.html_safe %>')
+          },
+          yAxis: {
+            title: {
+              text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+              }]
+          },
+          tooltip: {
+            formatter: function() {
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'bottom',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+          },
+          series: [
+            {
+              showInLegend: false,
+              name: 'IDSR DZ',
+              data: eval('<%= @idsr_dz.to_json.html_safe %>')
+            }
+          ]
+        });
+      });
+
+      function resizeIframe(obj){
+        obj.height = obj.scrollHeight  + "px";
+        obj.width = obj.scrollWidth + "px";
+      }
+
+      function viewPatients(obj){
+        diagnosis = obj.getAttribute("diagnosis");
+
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/observations_by_diagnosis",
+          data: "diagnosis=" + diagnosis,
+          success: function(results){
+            results = eval("(" + results  + ")");
+            count = 1;
+            html = "";
+            patientCount = 0
+            for (var s in results){
+              national_id = results[s]["national_id"];
+              gender = results[s]["gender"];
+              age = results[s]["age"];
+              obs_date = results[s]["obs_date"];
+              html += "<tr>";
+              html += "<td>" + count + "</td>";
+              html += "<td>" + national_id + "</td>";
+              html += "<td>" + gender + "</td>";
+              html += "<td>" + age + "</td>";
+              html += "<td>" + obs_date + "</td>";
+              html += "</tr>";
+              count = count + 1;
+              patientCount = patientCount + 1;
+            }
+            document.getElementById('tbody').innerHTML = html;
+            document.getElementById('patient-count').innerHTML = "Total Patients (" + patientCount + ")";
+            $('#myModal').modal('show');
+            document.getElementsByClassName('modal-title')[0].innerHTML = diagnosis;
+          }
+
+        })
+      }
     </script>
     <style>
       body{
@@ -356,12 +569,12 @@
       <div class="block" style="height: 78vh;">
         <div class="navbar navbar-inner block-header">
           <div class="muted pull-left" id="national_label">
-            NORTHERN ZONE
+              NORTHERN ZONE
           </div>
         </div>
         <div class="block-content collapse in" style="height:100%;">
           <div id="c_map">
-            <object id="map" type="image/svg+xml" data="/assets/mw/zone_northern.svg" style="height:70vh; width: 100%;"></object>
+            <object onload="resizeIframe(this)" id="map" type="image/svg+xml" data="/assets/mw/zone_northern.svg" style="height:70vh; width: 100%;"></object>
           </div>
         </div>
       </div>
@@ -372,11 +585,11 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Brucellosis
+              SG FEVER
             </div>
           </div>
           <div class="block-content collapse in">
-            <div id="diagnosis_one" style="height:130px !important; width:350px;">
+            <div id="diagnosis_one" style="height:130px !important; width:450px;">
             </div>
           </div>
         </div>
@@ -385,11 +598,11 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Food poisoning
+              SG URI
             </div>
           </div>
           <div class="block-content collapse in">
-            <div id="diagnosis_two" style="height:130px !important; width:350px;">
+            <div id="diagnosis_two" style="height:130px !important; width:450px;">
             </div>
           </div>
         </div>
@@ -398,110 +611,182 @@
         <div class="block">
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Anthrax
+              SG LRI
             </div>
           </div>
           <div class="block-content collapse in">
-            <div id="diagnosis_three" style="height:130px !important; width:350px;">
+            <div id="diagnosis_three" style="height:130px !important; width:450px;">
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
 
     <div class="row-fluid" style="position: absolute; left:25%; top:275px;">
       <div class="span3">
         <div class="block">
-          <div class="block-content collapse in">
-            <div id="diagnosis_four" style="height:130px !important; width:350px;">
-            </div>
-          </div>
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Acute meningitis
+              SG RI
             </div>
           </div>
-        </div>
-      </div>
-      <div class="span3">
-        <div class="block">         
           <div class="block-content collapse in">
-            <div id="diagnosis_five" style="height:130px !important; width:350px;">
-            </div>
-          </div>
-          <div class="navbar navbar-inner block-header">
-            <div class="muted pull-right" id="district_label">
-              Scarlet fever
+            <div id="diagnosis_four" style="height:130px !important; width:450px;">
             </div>
           </div>
         </div>
       </div>
       <div class="span3">
         <div class="block">
-          <div class="block-content collapse in">
-            <div id="diagnosis_six" style="height:130px !important; width:350px;">
-            </div>
-          </div>
           <div class="navbar navbar-inner block-header">
             <div class="muted pull-right" id="district_label">
-              Acute encephalitis
+              SG_UGI
+            </div>
+          </div>
+          <div class="block-content collapse in">
+            <div id="diagnosis_five" style="height:130px !important; width:450px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="block">
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-right" id="district_label">
+              SG_LGI
+            </div>
+          </div>
+          <div class="block-content collapse in">
+            <div id="diagnosis_six" style="height:130px !important; width:450px;">
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row-fluid" style="position: absolute; left:25%; top:467px; width:74.3%;">
-      <!-- block -->
+    <div class="row-fluid" style="position: absolute; left:25%; bottom:11%;">
+      <div class="span3">
+        <div class="block">
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-right" id="district_label">
+              SG GI
+            </div>
+          </div>
+          <div class="block-content collapse in">
+            <div id="diagnosis_seven" style="height:130px !important; width:450px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="block">
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-right" id="district_label">
+              NCD
+            </div>
+          </div>
+          <div class="block-content collapse in">
+            <div id="diagnosis_eight" style="height:130px !important; width:450px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="block">
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-right" id="district_label">
+              IDSR DZ
+            </div>
+          </div>
+          <div class="block-content collapse in">
+            <div id="diagnosis_nine" style="height:130px !important; width:450px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="row-fluid" style="position: absolute; left:25%; bottom: 70px; width:74.3%;">
       <div class="block">
         <div class="navbar navbar-inner block-header">
           <div class="muted pull-left">Cases</div>
         </div>
         <div class="block-content collapse in">
-          <div style="width:100%;">
+          <div style="width:100%; height: 160px; overflow: auto;">
             <table class="table table-bordered">
               <tbody>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Rabies</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Food Poisoning</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Brucellosis</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Smallpox</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Acute meningitis</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Enteric fever</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Tuberculosis</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Tetanus</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> SARS</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Diabetes</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Hypertension</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Whooping cough</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Measles</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Accidents</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Yellow fever</a></td>
-                </tr>
-                <tr>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Influenza</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,000</span> Diphtheria</a></td>
-                  <td><a href="#"><span class="badge badge-info pull-right">1,234</span> Leprosy</a></td>
-                </tr>
+                <% @data.each do |row| %>
+                  <tr>
+                    <% row.each do |values| %>
+                      <%
+                      diagnosis = values[0]
+                      count = values[1]
+                    %>
+                      <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
+                    <% end %>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
           </div>
+
         </div>
       </div>
-      <!-- /block -->
+
+    </div>-->
+    <!--<div class="row-fluid" style="width: 100%; position: relative;"><%=("<br />" * 5).html_safe %>
+    </div>-->
+
+
+
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"></h4>
+          </div>
+          <div class="modal-body">
+            <span id="my_modal_content">
+
+              <div class="row-fluid">
+                <!-- block -->
+                <div class="block">
+                  <div class="navbar navbar-inner block-header">
+                    <div class="pull-left" id="patient-count"></div>
+                  </div>
+                  <div class="block-content collapse in">
+                    <div class="span12">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>National ID</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Visit Date</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- /block -->
+              </div>
+
+            </span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row-fluid" style="width: 100%; position: relative;"><%=("<br />" * 5).html_safe %>
-    </div>
+    <!--CONFIRMATION POPUP END -->
 
     <script>
 
@@ -590,14 +875,11 @@
 
             svg.getElementById(districtID).onclick = function () {
 
-              //drawBorder(this.id);
-
             }
 
           }
         }
-
-        loadSites();
+        loadZoneSitesByOffsets('zone_northern');
       }
 
       function insertSite(x, y, color, id) {
@@ -619,7 +901,7 @@
 
         circle.setAttribute("stroke", "black");
 
-        //mw.appendChild(circle);
+        mw.appendChild(circle);
       }
 
       function insertSiteByOffset(x, y, color, id, district) {
@@ -644,12 +926,12 @@
 
         circle.setAttribute("stroke", "black");
 
-        //mw.appendChild(circle);
+        mw.appendChild(circle);
       }
 
       function insertZoneSiteByOffset(x, y, color, id, district) {
 
-        var doc = __$("zone").contentDocument;
+        var doc = __$("map").contentDocument;
 
         var mw = doc.getElementById(district);
 
@@ -669,7 +951,7 @@
 
         circle.setAttribute("stroke", "black");
 
-        //mw.appendChild(circle);
+        mw.appendChild(circle);
       }
 
       function loadSites() {
@@ -1062,5 +1344,6 @@
       setDefaults();
 
     </script>
+
   </body>
 </html>
