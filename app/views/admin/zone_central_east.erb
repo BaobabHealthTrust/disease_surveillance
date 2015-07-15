@@ -853,33 +853,33 @@
 
         }
 
-        var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
+        /*var elements = ["chitipa", "karonga", "rumphi", "mzimba", "nkhatabay", "nkhotakota", "salima", "kasungu", "dedza",
           "lilongwe", "ntchisi", "ntcheu", "mchinji", "dowa", "balaka", "zomba", "machinga", "blantyre", "machinga",
           "chiradzulu", "chikwawa", "nsanje", "neno", "mwanza", "phalombe", "mulanje", "likoma", "thyolo", "mangochi"]
-
-        for (var i = 0; i < elements.length; i++) {
-
-          if (svg.getElementById(elements[i])) {
-
-            svg.getElementById(elements[i]).onmouseover = function () {
-              this.setAttribute("title", this.id.capitalize())
+         */
+        var elements = {"MW.NK":"Nkhotakota", "MW.DO":"Dowa", "MW.NI":"Ntchisi", "MW.SA":"Salima", "MW.KS":"Kasungu"}
+        for (var districtID in elements) {
+          if (svg.getElementById(districtID)) {
+            svg.getElementById(districtID).onmouseover = function () {
+              currentDistrict = elements[this.id];
+              this.setAttribute("title", currentDistrict.capitalize())
               this.setAttribute("style", "fill:#ffcccc;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+
             }
 
-            svg.getElementById(elements[i]).onmouseout = function () {
+            svg.getElementById(districtID).onmouseout = function () {
+
               this.setAttribute("style", "fill:#ffffff;stroke:#6e6e6e;stroke-width:0.40000001000000002;fill-opacity:1");
+
             }
 
-            svg.getElementById(elements[i]).onclick = function () {
-
-              //drawBorder(this.id);
+            svg.getElementById(districtID).onclick = function () {
 
             }
 
           }
         }
-
-        loadSites();
+        loadZoneSitesByOffsets('zone_c_east');
       }
 
       function insertSite(x, y, color, id) {
@@ -931,7 +931,7 @@
 
       function insertZoneSiteByOffset(x, y, color, id, district) {
 
-        var doc = __$("zone").contentDocument;
+        var doc = __$("map").contentDocument;
 
         var mw = doc.getElementById(district);
 
@@ -1058,9 +1058,9 @@
 
         }
       }
-
+      
       function drawBorder(district) {
-
+        alert(district)
         var names = {
           "chitipa": "Chitipa",
           "karonga": 'Karonga',
@@ -1234,6 +1234,7 @@
             region = "North";
             break;
           case "zone_c_east":
+            console.log("here")
             region = "Central";
             zone = "Central East";
             break;
@@ -1254,7 +1255,6 @@
         if (zone == undefined || region == undefined) return;
 
         var zone_districts = Object.keys(zones[region][zone]);
-
         for (var s = 0; s < zone_districts.length; s++) {
 
           var target = sites_by_zones[zone_districts[s]];
@@ -1273,11 +1273,11 @@
 
         }
 
-        if(__$("zone_label")){
+        /*if(__$("zone_label")){
 
           __$("zone_label").innerHTML = zone + " Zone";
 
-        }
+        }*/
 
       }
 
