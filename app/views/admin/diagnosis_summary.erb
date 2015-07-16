@@ -17,22 +17,22 @@
       <div class="span3" id="sidebar">
         <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
           <li id="zone_northern">
-            <a href="/admin/diagnosis_summary?zone=zone_northern"><i class="icon-chevron-right"></i> Northern Zone</a>
+            <a href="/admin/diagnosis_summary?zone=zone_northern&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> Northern Zone</a>
           </li>
           <li id="zone_c_east">
-            <a href="/admin/diagnosis_summary?zone=zone_c_east"><i class="icon-chevron-right"></i> Central East Zone</a>
+            <a href="/admin/diagnosis_summary?zone=zone_c_east&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> Central East Zone</a>
           </li>
           <li id="zone_c_west">
-            <a href="/admin/diagnosis_summary?zone=zone_c_west"><i class="icon-chevron-right"></i> Central West Zone</a>
+            <a href="/admin/diagnosis_summary?zone=zone_c_west&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> Central West Zone</a>
           </li>
           <li id="zone_s_east">
-            <a href="/admin/diagnosis_summary?zone=zone_s_east"><i class="icon-chevron-right"></i> South East Zone</a>
+            <a href="/admin/diagnosis_summary?zone=zone_s_east&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> South East Zone</a>
           </li>
           <li id="zone_s_west">
-            <a href="/admin/diagnosis_summary?zone=zone_s_west"><i class="icon-chevron-right"></i> South West Zone</a>
+            <a href="/admin/diagnosis_summary?zone=zone_s_west&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> South West Zone</a>
           </li>
           <li id="national">
-            <a href="/admin/diagnosis_summary?zone=national"><i class="icon-chevron-right"></i> National</a>
+            <a href="/admin/diagnosis_summary?zone=national&category=<%=  params[:category] %>&date=<%= params[:date] %>"><i class="icon-chevron-right"></i> National</a>
           </li>
           <!--<li class="active">
             <a href="/admin/view_diagnoses"><i class="icon-chevron-right"></i> View Diagnoses</a>
@@ -44,7 +44,7 @@
         <div class="row-fluid">
           <div class="block">
             <div class="navbar navbar-inner block-header">
-              <div class="muted pull-left">SYNDROME CATEGORY</div>
+              <div class="muted pull-left"><%= params[:category].humanize.upcase %>(<%= params[:date].to_date.strftime("%d-%B-%Y") %>)</div>
             </div>
             <div class="block-content collapse in">
               <div class="span12">
