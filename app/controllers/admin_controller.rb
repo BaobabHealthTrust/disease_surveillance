@@ -387,5 +387,14 @@ class AdminController < ApplicationController
     end
     render :text => patient_data.to_json.html_safe and return
   end
-  
+
+  def diagnosis_summary
+    hash = {}
+    Observation.all.each do |observation|
+      diagnosis_name = observation.diagnosis_full_name
+      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
+      hash[diagnosis_name] += 1
+    end
+    @data = hash.to_a.in_groups_of(3)
+  end
 end
