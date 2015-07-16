@@ -7,6 +7,7 @@ class Observation < CouchRest::Model::Base
   property :diagnosis_full_name, String
   property :diagnosis_category, String
   property :facility, String
+  property :zone, String
   property :obs_date, Date
   timestamps!
 
@@ -18,6 +19,10 @@ class Observation < CouchRest::Model::Base
     view :by_diagnosis_full_name
     view :by_diagnosis_category
     view :by_facility
+    view :by_zone
+    view :by_diagnosis_full_name_and_zone
+    view :by_diagnosis_category_and_zone
+    view :by_diagnosis_category_and_zone_and_obs_date
     view :by_obs_date
     view :by_diagnosis_category_and_obs_date
     view :by_obs_date_and_diagnosis_category
