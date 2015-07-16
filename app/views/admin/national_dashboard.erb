@@ -57,6 +57,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_FEVER&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,  
@@ -111,6 +125,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_URI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -167,6 +195,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_LRI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -221,6 +263,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_RI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -277,6 +333,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_UGI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -331,6 +401,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_LGI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -387,6 +471,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=SG_GI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -442,6 +540,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=NCD&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -496,6 +608,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=IDSR_DZ&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -705,7 +831,7 @@
         </div>
       </div>
     </div>
-    
+
     <!--<div class="row-fluid" style="position: absolute; left:25%; bottom: 70px; width:74.3%;">
       <div class="block">
         <div class="navbar navbar-inner block-header">
@@ -715,17 +841,17 @@
           <div style="width:100%; height: 160px; overflow: auto;">
             <table class="table table-bordered">
               <tbody>
-                <% @data.each do |row| %>
-                  <tr>
-                    <% row.each do |values| %>
-                      <%
-                      diagnosis = values[0]
-                      count = values[1]
-                    %>
-                      <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
-                    <% end %>
-                  </tr>
-                <% end %>
+    <% @data.each do |row| %>
+                    <tr>
+      <% row.each do |values| %>
+        <%
+        diagnosis = values[0]
+        count = values[1]
+      %>
+                          <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
+      <% end %>
+                    </tr>
+    <% end %>
               </tbody>
             </table>
           </div>
