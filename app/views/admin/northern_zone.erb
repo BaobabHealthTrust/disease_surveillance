@@ -57,6 +57,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_FEVER&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -111,6 +125,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_URI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -167,6 +195,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_LRI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -221,6 +263,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_RI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -277,6 +333,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_UGI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -331,6 +401,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_LGI&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
@@ -387,6 +471,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=SG_GI&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -442,6 +540,20 @@
             y: 100,
             borderWidth: 0
           },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=NCD&date=' + date;
+                  }
+                }
+              }
+            }
+          },
           series: [
             {
               showInLegend: false,
@@ -496,6 +608,20 @@
             x: -10,
             y: 100,
             borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category
+                    window.location = '/admin/diagnosis_summary?zone=zone_northern&category=IDSR_DZ&date=' + date;
+                  }
+                }
+              }
+            }
           },
           series: [
             {
