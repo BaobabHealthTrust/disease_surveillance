@@ -375,10 +375,14 @@ class AdminController < ApplicationController
   end
 
   def observations_by_diagnosis
-    diagnosis_obs = Observation.by_diagnosis_full_name(:key => params[:diagnosis]).all
+    if (params[:zone].match(/national/i))
+      observations = Observation.by_obs_date_and_diagnosis_category_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:diagnosis]}"]]).all
+    else
+      observations = Observation.by_obs_date_and_diagnosis_category_and_zone_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}", "#{params[:diagnosis]}"]]).all
+    end
     patient_data = {}
     count = 1
-    diagnosis_obs.each do |obs|
+    observations.each do |obs|
       patient_data[count] = {}
       patient_data[count]["national_id"] = obs.national_id
       patient_data[count]["gender"] = obs.gender

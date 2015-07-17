@@ -10,6 +10,44 @@
            element.classList.add('active');
          }
        }
+
+       function viewPatients(obj){
+        diagnosis = obj.getAttribute("diagnosis");
+        zone = '<%= params[:zone] %>';
+        disease_category = '<%= params[:category] %>';
+        date = '<%= params[:date] %>';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/observations_by_diagnosis",
+          data: "diagnosis=" + diagnosis + '&zone=' + zone + '&category=' + disease_category + '&date=' + date,
+          success: function(results){
+            results = eval("(" + results  + ")");
+            count = 1;
+            html = "";
+            patientCount = 0;
+            for (var s in results){
+              national_id = results[s]["national_id"];
+              gender = results[s]["gender"];
+              age = results[s]["age"];
+              obs_date = results[s]["obs_date"];
+              html += "<tr>";
+              html += "<td>" + count + "</td>";
+              html += "<td>" + national_id + "</td>";
+              html += "<td>" + gender + "</td>";
+              html += "<td>" + age + "</td>";
+              html += "<td>" + obs_date + "</td>";
+              html += "</tr>";
+              count = count + 1;
+              patientCount = patientCount + 1;
+            }
+            document.getElementById('tbody').innerHTML = html;
+            document.getElementById('patient-count').innerHTML = "Total Patients (" + patientCount + ")";
+            $('#myModal').modal('show');
+            document.getElementsByClassName('modal-title')[0].innerHTML = diagnosis;
+          }
+
+        })
+      }
     </script>
   </head>
   <body onload="setAttributes();">
@@ -73,5 +111,52 @@
       </div>
 
     </div>
+
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"></h4>
+          </div>
+          <div class="modal-body">
+            <span id="my_modal_content">
+
+              <div class="row-fluid">
+                <div class="block">
+                  <div class="navbar navbar-inner block-header">
+                    <div class="pull-left" id="patient-count"></div>
+                  </div>
+                  <div class="block-content collapse in">
+                    <div class="span12">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>National ID</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Visit Date</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CONFIRMATION POPUP END -->
   </body>
 </html>

@@ -28,6 +28,8 @@ class Observation < CouchRest::Model::Base
     view :by_diagnosis_category_and_obs_date
     view :by_obs_date_and_diagnosis_category
     view :by_obs_date_and_diagnosis_category_and_zone
+    view :by_obs_date_and_diagnosis_category_and_diagnosis_full_name
+    view :by_obs_date_and_diagnosis_category_and_zone_and_diagnosis_full_name
   end
 
 end
