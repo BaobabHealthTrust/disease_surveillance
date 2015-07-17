@@ -20,12 +20,14 @@ class Observation < CouchRest::Model::Base
     view :by_diagnosis_category
     view :by_facility
     view :by_zone
+    view :by_zone_and_diagnosis_category
     view :by_diagnosis_full_name_and_zone
     view :by_diagnosis_category_and_zone
     view :by_diagnosis_category_and_zone_and_obs_date
     view :by_obs_date
     view :by_diagnosis_category_and_obs_date
     view :by_obs_date_and_diagnosis_category
+    view :by_obs_date_and_diagnosis_category_and_zone
   end
 
 end

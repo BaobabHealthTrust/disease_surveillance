@@ -16,7 +16,7 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -67,30 +67,30 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
     latest_obs_dates.each do |obs_date|
-      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
+      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_northern"]])
       @idsr_dz << idsr_dz_obs.all.count
-      ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
+      ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_northern"]])
       @ncd << ncd_obs.all.count
-      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_GI"]])
+      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_GI", "zone_northern"]])
       @sg_gi << sg_gi_obs.all.count
-      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LGI"]])
+      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LGI", "zone_northern"]])
       @sg_lgi << sg_lgi_obs.all.count
-      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_UGI"]])
+      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_UGI", "zone_northern"]])
       @sg_ugi << sg_ugi_obs.all.count
-      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_RI"]])
+      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_RI", "zone_northern"]])
       @sg_ri << sg_ri_obs.all.count
-      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LRI"]])
+      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LRI", "zone_northern"]])
       @sg_lri << sg_lri_obs.all.count
-      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_URI"]])
+      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_URI", "zone_northern"]])
       @sg_uri << sg_uri_obs.all.count
-      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_FEVER"]])
+      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_FEVER", "zone_northern"]])
       @sg_fever << sg_fever_obs.all.count
     end
 
@@ -112,36 +112,37 @@ class AdminController < ApplicationController
   end
 
   def zone_central_east
+    #Observation.by_zone_and_diagnosis_category.keys([["zone_c_east", "SG_FEVER"]])
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
     latest_obs_dates.each do |obs_date|
-      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
+      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_c_east"]])
       @idsr_dz << idsr_dz_obs.all.count
-      ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
+      ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_c_east"]])
       @ncd << ncd_obs.all.count
-      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_GI"]])
+      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_GI", "zone_c_east"]])
       @sg_gi << sg_gi_obs.all.count
-      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LGI"]])
+      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LGI", "zone_c_east"]])
       @sg_lgi << sg_lgi_obs.all.count
-      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_UGI"]])
+      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_UGI", "zone_c_east"]])
       @sg_ugi << sg_ugi_obs.all.count
-      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_RI"]])
+      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_RI", "zone_c_east"]])
       @sg_ri << sg_ri_obs.all.count
-      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LRI"]])
+      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LRI", "zone_c_east"]])
       @sg_lri << sg_lri_obs.all.count
-      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_URI"]])
+      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_URI", "zone_c_east"]])
       @sg_uri << sg_uri_obs.all.count
-      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_FEVER"]])
+      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_FEVER", "zone_c_east"]])
       @sg_fever << sg_fever_obs.all.count
     end
 
@@ -161,30 +162,30 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
     latest_obs_dates.each do |obs_date|
-      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
+      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_c_west"]])
       @idsr_dz << idsr_dz_obs.all.count
-      ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
+      ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_c_west"]])
       @ncd << ncd_obs.all.count
-      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_GI"]])
+      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_GI", "zone_c_west"]])
       @sg_gi << sg_gi_obs.all.count
-      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LGI"]])
+      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LGI", "zone_c_west"]])
       @sg_lgi << sg_lgi_obs.all.count
-      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_UGI"]])
+      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_UGI", "zone_c_west"]])
       @sg_ugi << sg_ugi_obs.all.count
-      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_RI"]])
+      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_RI", "zone_c_west"]])
       @sg_ri << sg_ri_obs.all.count
-      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LRI"]])
+      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LRI", "zone_c_west"]])
       @sg_lri << sg_lri_obs.all.count
-      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_URI"]])
+      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_URI", "zone_c_west"]])
       @sg_uri << sg_uri_obs.all.count
-      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_FEVER"]])
+      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_FEVER", "zone_c_west"]])
       @sg_fever << sg_fever_obs.all.count
     end
 
@@ -204,30 +205,30 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
     latest_obs_dates.each do |obs_date|
-      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
+      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_s_east"]])
       @idsr_dz << idsr_dz_obs.all.count
-      ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
+      ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_s_east"]])
       @ncd << ncd_obs.all.count
-      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_GI"]])
+      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_GI", "zone_s_east"]])
       @sg_gi << sg_gi_obs.all.count
-      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LGI"]])
+      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LGI", "zone_s_east"]])
       @sg_lgi << sg_lgi_obs.all.count
-      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_UGI"]])
+      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_UGI", "zone_s_east"]])
       @sg_ugi << sg_ugi_obs.all.count
-      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_RI"]])
+      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_RI", "zone_s_east"]])
       @sg_ri << sg_ri_obs.all.count
-      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LRI"]])
+      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LRI", "zone_s_east"]])
       @sg_lri << sg_lri_obs.all.count
-      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_URI"]])
+      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_URI", "zone_s_east"]])
       @sg_uri << sg_uri_obs.all.count
-      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_FEVER"]])
+      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_FEVER", "zone_s_east"]])
       @sg_fever << sg_fever_obs.all.count
     end
 
@@ -247,30 +248,30 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%y')}
+    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
     latest_obs_dates.each do |obs_date|
-      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
+      idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_s_west"]])
       @idsr_dz << idsr_dz_obs.all.count
-      ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
+      ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_s_west"]])
       @ncd << ncd_obs.all.count
-      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_GI"]])
+      sg_gi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_GI", "zone_s_west"]])
       @sg_gi << sg_gi_obs.all.count
-      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LGI"]])
+      sg_lgi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LGI", "zone_s_west"]])
       @sg_lgi << sg_lgi_obs.all.count
-      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_UGI"]])
+      sg_ugi_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_UGI", "zone_s_west"]])
       @sg_ugi << sg_ugi_obs.all.count
-      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_RI"]])
+      sg_ri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_RI", "zone_s_west"]])
       @sg_ri << sg_ri_obs.all.count
-      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_LRI"]])
+      sg_lri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_LRI", "zone_s_west"]])
       @sg_lri << sg_lri_obs.all.count
-      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_URI"]])
+      sg_uri_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_URI", "zone_s_west"]])
       @sg_uri << sg_uri_obs.all.count
-      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "SG_FEVER"]])
+      sg_fever_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "SG_FEVER", "zone_s_west"]])
       @sg_fever << sg_fever_obs.all.count
     end
 
@@ -390,7 +391,13 @@ class AdminController < ApplicationController
 
   def diagnosis_summary
     hash = {}
-    Observation.all.each do |observation|
+    if (params[:zone].match(/national/i))
+      observations = Observation.by_obs_date_and_diagnosis_category.keys([["#{params[:date].to_date}", "#{params[:category]}"]]).all
+    else
+      observations = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}"]]).all
+    end
+    
+    observations.each do |observation|
       diagnosis_name = observation.diagnosis_full_name
       hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
       hash[diagnosis_name] += 1
