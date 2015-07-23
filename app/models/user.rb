@@ -35,7 +35,8 @@ class User < CouchRest::Model::Base
   end
 
   before_save do |pass|
-    self.password_hash = BCrypt::Password.create(self.password_hash) if not self.password_hash.blank?
+    check_password = BCrypt::Password.new(self.password_hash) rescue 'invalid hash'
+    self.password_hash = BCrypt::Password.create(self.password_hash) if (check_password == 'invalid hash')
     self.creator = 'admin' if self.creator.blank?
   end
 
