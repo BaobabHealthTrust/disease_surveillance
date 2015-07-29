@@ -4,7 +4,7 @@
   <head>
     <title>Disease Surveillance</title>
     <!-- Bootstrap -->
-    <link href="/assets/bootstrap.min.css" rel="stylesheet" media="screen"/>
+
     <link href="/assets/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
     <link rel="stylesheet" href="/assets/bootstrap.css" />
     <link rel="stylesheet" href="/assets/login.css" />
@@ -31,65 +31,88 @@
       .form-signin .btn-primary{
         width:400px;
       }
+
       .form-signin .btn-success{
 
+      }
+
+      .system_name {
+        background-color: #fafafa;
+        background-image: linear-gradient(to bottom, #fff, #f2f2f2);
+        background-repeat: repeat-x;
+        border: 1px solid #d4d4d4;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        min-height: 50px;
+        color: #777;
+        font-size: 20px;
+        font-weight: 200;
+        text-shadow: 0 1px 0 #fff;
+      }
+
+      .app_name{
+        position: relative;
+        font-size: 20px;
+        padding-left: 5px;
+        top: 11px;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
       }
     </style>
   </head>
 
   <body>
+    <% if (flash[:error] || flash[:notice]) %>
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">
+                <% if flash[:error] %>
+                  <span style="font-size:14pt; color:red">Message</span>
+                <% else %>
+                  <span style="font-size:14pt; color:green">Message</span>
+                <% end %>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <span style="font-size:14pt;">
+                <% if flash[:error]%>
+                  <%= flash[:error] %>
+                <% else %>
+                  <%= flash[:notice] %>
+                <% end %>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function showPopup(){
+          $('#myModal').modal('show');
+        }
+        window.setTimeout("showPopup();", 300);
+      </script>
+    <% end %>
+
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#" ><span style="text-align: center;">NATIONAL DISEASE SURVEILLANCE MANAGEMENT SYSTEM</span></a>
+          <div class="system_name">
+            <a class="brand" href="#" style="text-decoration: none; color: #777;" >
+              <span class="app_name">NATIONAL DISEASE SURVEILLANCE MANAGEMENT SYSTEM</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container-fluid">
       <div class="container">
-
         <div class="tab-content">
-          <% if (flash[:error] || flash[:notice]) %>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">
-                      <% if flash[:error] %>
-                        <span style="font-size:14pt; color:red">Message</span>
-                      <% else %>
-                        <span style="font-size:14pt; color:green">Message</span>
-                      <% end %>
-                    </h4>
-                  </div>
-                  <div class="modal-body">
-                    <span style="font-size:14pt;">
-                      <% if flash[:error]%>
-                        <%= flash[:error] %>
-                      <% else %>
-                        <%= flash[:notice] %>
-                      <% end %>
-                    </span>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <script>
-              function showPopup(){
-                $('#myModal').modal('show');
-              }
-              window.setTimeout("showPopup();", 300);
-            </script>
-          <% end %>
           <img class="mw_logo" src="/assets/mw.gif"/>
           <div id="login" class="tab-pane active">
             <form action="/users/authenticate/" class="form-signin" method="POST">
