@@ -13,6 +13,7 @@ class Feed < CouchRest::Model::Base
 =end
   property :title, String
   property :description, String
+  property :link, String
   property :published_date, Date
   property :pull_date, Date
   timestamps!
