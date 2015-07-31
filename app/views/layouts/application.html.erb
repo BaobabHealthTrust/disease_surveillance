@@ -13,6 +13,17 @@
     <![endif]-->
     <script src="/assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <%= csrf_meta_tags %>
+    <script type="text/javascript">
+        var currentZone = '';
+        pathName = location.pathname;
+        if (pathName.length == 1){
+          currentZone = 'national';
+        }
+        else{
+          splitted_paths = pathName.split('/');
+          currentZone = splitted_paths[splitted_paths.length - 1];
+        }
+    </script>
     <style>
       .separator{
         font-weight: bold;
@@ -20,16 +31,16 @@
         padding-left:1em;
         padding-right: 1em;
         color: red;
-    }
+      }
 
-    .feeds{
-      color:white;
-    }
+      .feeds{
+        color:white;
+      }
 
-    .feeds:hover{
+      .feeds:hover{
         color:white;
         text-decoration: line-through;
-    }
+      }
     </style>
   </head>
 
@@ -77,12 +88,20 @@
                   <li><a tabindex="-1" href="/admin/national_dashboard">National</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
+              <!--<li class="dropdown">
                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Diagnosis Settings <i class="caret"></i></a>
                 <ul class="dropdown-menu">
                   <li><a tabindex="-1" href="/admin/add_diagnosis">Add Diagnosis</a></li>
                   <li><a tabindex="-1" href="/admin/remove_diagnosis">Remove Diagnosis</a></li>
                   <li><a tabindex="-1" href="/admin/view_diagnoses">View Diagnoses</a></li>
+                </ul>
+              </li>-->
+              <li class="dropdown">
+                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Change Granularity <i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#">Monthly</a></li>
+                  <li><a tabindex="-1" href="#">Weekly</a></li>
+                  <li><a tabindex="-1" href="#">Daily</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -107,25 +126,25 @@
     </div>
     <div class="navbar navbar-fixed-bottom">
       <div class="navbar-inner">
-      <div style="border: 1px solid #999; margin: 10px; border-radius: 10px;vertical-align: middle; overflow: hidden;">
-        <table width="100%" style="margin: 0px; height: 20px;" cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="color: red; font-size: 28px; padding-left: 10px; padding-right: 10px; padding-top: 7px;
-                font-style: italic; font-weight: bold; text-align: center; background-color: #fff;">
-              NEWS<br />
-              <span style="color: blue; font-size: 0.4em;">Live Updates</span>
-            </td>
-            <td style="background-color: blue; color: white; line-height: 2em;">
-              <marquee id="news" direction="left" style="float: left; font-size: 32px;">
-                <%= feeds.to_s.html_safe -%>
-              </marquee>
+        <div style="border: 1px solid #999; margin: 10px; border-radius: 10px;vertical-align: middle; overflow: hidden;">
+          <table width="100%" style="margin: 0px; height: 20px;" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="color: red; font-size: 28px; padding-left: 10px; padding-right: 10px; padding-top: 7px;
+                  font-style: italic; font-weight: bold; text-align: center; background-color: #fff;">
+                NEWS<br />
+                <span style="color: blue; font-size: 0.4em;">Live Updates</span>
+              </td>
+              <td style="background-color: blue; color: white; line-height: 2em;">
+            <marquee id="news" direction="left" style="float: left; font-size: 32px;">
+              <%= feeds.to_s.html_safe -%>
+            </marquee>
             </td>
             <td style="min-width: 200px; background-color: #000; color: #cfe7f5; font-size: 24px; padding: 5px; text-align:center">
               Kamuzu Central Hospital
             </td>
-          </tr>
-        </table>
-      </div>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <script src="/assets/bootstrap.min.js"></script>
