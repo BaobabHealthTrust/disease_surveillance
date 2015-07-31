@@ -388,6 +388,7 @@ class AdminController < ApplicationController
       patient_data[count]["gender"] = obs.gender
       patient_data[count]["age"] = obs.age
       patient_data[count]["obs_date"] = obs.obs_date.to_date.strftime("%d/%b/%Y")
+      patient_data[count]["facility"] = obs.facility
       count = count + 1
     end
     render :text => patient_data.to_json.html_safe and return

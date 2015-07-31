@@ -4,14 +4,14 @@
     <title>Diagnosis Summary</title>
     <script type="text/javascript" src="/assets/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
-       function setAttributes(){
-         element = document.getElementById('<%= params[:zone] %>');
-         if (element){
-           element.classList.add('active');
-         }
-       }
+      function setAttributes(){
+        element = document.getElementById('<%= params[:zone] %>');
+        if (element){
+          element.classList.add('active');
+        }
+      }
 
-       function viewPatients(obj){
+      function viewPatients(obj){
         diagnosis = obj.getAttribute("diagnosis");
         zone = '<%= params[:zone] %>';
         disease_category = '<%= params[:category] %>';
@@ -30,12 +30,14 @@
               gender = results[s]["gender"];
               age = results[s]["age"];
               obs_date = results[s]["obs_date"];
+              facility = results[s]["facility"];
               html += "<tr>";
               html += "<td>" + count + "</td>";
               html += "<td>" + national_id + "</td>";
               html += "<td>" + gender + "</td>";
               html += "<td>" + age + "</td>";
               html += "<td>" + obs_date + "</td>";
+              html += "<td>" + facility + "</td>";
               html += "</tr>";
               count = count + 1;
               patientCount = patientCount + 1;
@@ -49,6 +51,12 @@
         })
       }
     </script>
+    <style>
+      .modal {
+        left: 47%;
+        width: 675px;
+      }
+    </style>
   </head>
   <body onload="setAttributes();">
     <div class="row-fluid">
@@ -92,7 +100,7 @@
                       <% @data.each do |row| %>
                         <tr>
                           <% row.each do |values| %>
-                            <% 
+                            <%
                             diagnosis = values[0] rescue ''
                             count = values[1] rescue ''
                           %>
@@ -138,6 +146,7 @@
                             <th>Gender</th>
                             <th>Age</th>
                             <th>Visit Date</th>
+                            <th>Facility</th>
                           </tr>
                         </thead>
                         <tbody id="tbody">
