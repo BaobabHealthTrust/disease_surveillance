@@ -409,4 +409,23 @@ class AdminController < ApplicationController
     end
     @data = hash.to_a.in_groups_of(3)
   end
+
+  def chart_by_zone_and_period_type_and_syndrome
+    zone = params[:zone]
+    diagnosis_category = params[:diagnosis_category]
+    period_type = params[:period_type]
+    dates = []
+    if(period_type == 'daily')
+
+    end
+    
+    if(period_type == 'weekly')
+
+    end
+    
+    if(period_type == 'monthly')
+
+    end
+  end
+
 end

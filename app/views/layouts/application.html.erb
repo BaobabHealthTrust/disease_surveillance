@@ -23,6 +23,21 @@
           splitted_paths = pathName.split('/');
           currentZone = splitted_paths[splitted_paths.length - 1];
         }
+
+      function diagnosisOneChartGranular(zone, period_type){
+        syndrome = 'Syndrome 1 here';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+            
+          }
+
+        })
+      }
+      
     </script>
     <style>
       .separator{

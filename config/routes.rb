@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   post 'admin/observations_by_diagnosis'
   get 'admin/diagnosis_summary'
   post 'admin/diagnosis_summary'
+  post 'admin/chart_by_zone_and_period_type_and_syndrome'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
