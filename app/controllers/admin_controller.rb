@@ -415,16 +415,46 @@ class AdminController < ApplicationController
     diagnosis_category = params[:diagnosis_category]
     period_type = params[:period_type]
     dates = []
+    latest_date = Date.today
+    hash = {}
     if(period_type == 'daily')
 
     end
     
     if(period_type == 'weekly')
-
+      weeks = []
+      count = 0
+      start_week = (latest_date - 4.weeks)
+      while  (latest_date > start_week)
+        if (count == 0)
+          week_beginning = latest_date.beginning_of_week
+          week_ending = latest_date
+        else
+          week_beginning = latest_date.beginning_of_week
+          week_ending = latest_date.end_of_week - 1.day
+        end
+        weeks << [week_beginning, week_ending]
+        latest_date = latest_date - 8.days
+        count = count + 1
+      end
     end
     
     if(period_type == 'monthly')
-
+      months = []
+      count = 0
+      start_month = (latest_date - 4.months)
+      while  (latest_date > start_month)
+        if (count == 0)
+          month_beginning = latest_date.beginning_of_month
+          month_ending = latest_date
+        else
+          month_beginning = latest_date.beginning_of_month
+          month_ending = latest_date.end_of_month
+        end
+        months << [month_beginning, month_ending]
+        latest_date = latest_date - latest_date.end_of_month.day.days #e.g 30 days, or 31 days
+        count = count + 1
+      end
     end
   end
 

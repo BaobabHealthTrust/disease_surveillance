@@ -25,7 +25,7 @@
         }
 
       function diagnosisOneChartGranular(zone, period_type){
-        syndrome = 'Syndrome 1 here';
+        syndrome = 'SG_FEVER';
         jQuery.ajax({
           type: "POST",
           url: "/admin/chart_by_zone_and_period_type_and_syndrome",
@@ -37,7 +37,161 @@
 
         })
       }
+
+      function diagnosisTwoChartGranular(zone, period_type){
+        syndrome = 'SG_URI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisThreeChartGranular(zone, period_type){
+        syndrome = 'SG_LRI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisFourChartGranular(zone, period_type){
+        syndrome = 'SG_RI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisFiveChartGranular(zone, period_type){
+        syndrome = 'SG_UGI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisSixChartGranular(zone, period_type){
+        syndrome = 'SG_LGI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisSevenChartGranular(zone, period_type){
+        syndrome = 'SG_GI';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisEightChartGranular(zone, period_type){
+        syndrome = 'NCD';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function diagnosisNineChartGranular(zone, period_type){
+        syndrome = 'IDSR_DZ';
+        jQuery.ajax({
+          type: "POST",
+          url: "/admin/chart_by_zone_and_period_type_and_syndrome",
+          data: 'zone=' + zone + '&period_type=' + period_type + '&diagnosis_category=' + syndrome,
+          success: function(results){
+            results = eval("(" + results  + ")");
+
+          }
+
+        })
+      }
+
+      function dailyData(){
+        var zone = currentZone;
+        var period_type = 'daily';
+        diagnosisOneChartGranular(zone, period_type);
+        diagnosisTwoChartGranular(zone, period_type);
+        diagnosisThreeChartGranular(zone, period_type);
+        diagnosisFourChartGranular(zone, period_type);
+        diagnosisFiveChartGranular(zone, period_type);
+        diagnosisSixChartGranular(zone, period_type);
+        diagnosisSevenChartGranular(zone, period_type);
+        diagnosisEightChartGranular(zone, period_type);
+        diagnosisNineChartGranular(zone, period_type);
+      }
       
+      function weeklyData(){
+        var zone = currentZone;
+        var period_type = 'weekly';
+        diagnosisOneChartGranular(zone, period_type);
+        diagnosisTwoChartGranular(zone, period_type);
+        diagnosisThreeChartGranular(zone, period_type);
+        diagnosisFourChartGranular(zone, period_type);
+        diagnosisFiveChartGranular(zone, period_type);
+        diagnosisSixChartGranular(zone, period_type);
+        diagnosisSevenChartGranular(zone, period_type);
+        diagnosisEightChartGranular(zone, period_type);
+        diagnosisNineChartGranular(zone, period_type);
+      }
+
+      function monthlyData(){
+        var zone = currentZone;
+        var period_type = 'monthly';
+        diagnosisOneChartGranular(zone, period_type);
+        diagnosisTwoChartGranular(zone, period_type);
+        diagnosisThreeChartGranular(zone, period_type);
+        diagnosisFourChartGranular(zone, period_type);
+        diagnosisFiveChartGranular(zone, period_type);
+        diagnosisSixChartGranular(zone, period_type);
+        diagnosisSevenChartGranular(zone, period_type);
+        diagnosisEightChartGranular(zone, period_type);
+        diagnosisNineChartGranular(zone, period_type);
+      }
+
     </script>
     <style>
       .separator{
@@ -114,9 +268,9 @@
               <li class="dropdown">
                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Change Granularity <i class="caret"></i></a>
                 <ul class="dropdown-menu">
-                  <li><a tabindex="-1" href="#">Monthly</a></li>
-                  <li><a tabindex="-1" href="#">Weekly</a></li>
-                  <li><a tabindex="-1" href="#">Daily</a></li>
+                  <li onclick="monthlyData();"><a tabindex="-1" href="#">Monthly</a></li>
+                  <li onclick="weeklyData();"><a tabindex="-1" href="#">Weekly</a></li>
+                  <li onclick="dailyData();"><a tabindex="-1" href="#">Daily</a></li>
                 </ul>
               </li>
               <li class="dropdown">
