@@ -14,15 +14,15 @@
     <script src="/assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <%= csrf_meta_tags %>
     <script type="text/javascript">
-        var currentZone = '';
-        pathName = location.pathname;
-        if (pathName.length == 1){
-          currentZone = 'national';
-        }
-        else{
-          splitted_paths = pathName.split('/');
-          currentZone = splitted_paths[splitted_paths.length - 1];
-        }
+      var currentZone = '';
+      pathName = location.pathname;
+      if (pathName.length == 1){
+        currentZone = 'national';
+      }
+      else{
+        splitted_paths = pathName.split('/');
+        currentZone = splitted_paths[splitted_paths.length - 1];
+      }
 
       function diagnosisOneChartGranular(zone, period_type){
         jQuery.ajax({
@@ -31,7 +31,627 @@
           data: 'zone=' + zone + '&period_type=' + period_type,
           success: function(results){
             results = eval("(" + results  + ")");
-            
+            xaxis = results["xaxis"];
+
+
+
+            /*******************************************************************/
+
+
+            $('#diagnosis_one').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_FEVER&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG FEVER',
+                  data: results["sg_fever_data"]
+                }
+              ]
+            });
+
+
+            $('#diagnosis_two').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_URI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG URI',
+                  data: results["sg_uri_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_three').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_LRI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG LRI',
+                  data: results["sg_lri_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_four').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_RI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG RI',
+                  data: results["sg_ri_data"]
+                }
+              ]
+            });
+
+
+            $('#diagnosis_five').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_UGI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG UGI',
+                  data: results["sg_ugi_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_six').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_LGI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG LGI',
+                  data: results["sg_lgi_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_seven').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_GI&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'SG GI',
+                  data: results["sg_gi_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_eight').highcharts({
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=NCD&date=' + date;
+                      }
+                    }
+                  }
+                }
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'NCD',
+                  data: results["ncd_data"]
+                }
+              ]
+            });
+
+            $('#diagnosis_nine').highcharts({
+          chart: {
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 25,
+            marginLeft: 32
+          },
+          title: {
+            text: '',
+            x: -20 //center
+          },
+          subtitle: {
+            text: '',
+            x: -20
+          },
+          xAxis: {
+            categories: xaxis
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+              }]
+          },
+          tooltip: {
+            formatter: function() {
+              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+            }
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'bottom',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+          },
+          plotOptions:{
+            series:{
+              allowPointSelect: true,
+              cursor: 'pointer',
+              point: {
+                events:{
+                  select: function(e) {
+                    var date = e.currentTarget.category;
+                    window.location = '/admin/diagnosis_summary?zone=national&category=IDSR_DZ&date=' + date;
+                  }
+                }
+              }
+            }
+          },
+          series: [
+            {
+              showInLegend: false,
+              name: 'IDSR DZ',
+              data: results["idsr_data"]
+            }
+          ]
+        });
+            /******************************************************************/
           }
 
         })

@@ -449,7 +449,7 @@ class AdminController < ApplicationController
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
-        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date, {}]).all
+        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
         observations.each do |observation|
           if (observation.diagnosis_category == 'SG_FEVER')
             sg_fever_count = sg_fever_count + 1
