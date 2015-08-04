@@ -420,8 +420,69 @@ class AdminController < ApplicationController
     sg_fever_data = []; sg_uri_data = []; sg_lri_data = []; sg_ri_data = []; sg_ugi_data = [];
     sg_lgi_data = []; sg_gi_data = []; ncd_data = []; idsr_data = [];
     xaxis = []
+    
     if(period_type == 'daily')
+       start_day = latest_date - 20.days
+       days = (start_day..latest_date).map{ |date| date} #21 dates
+       days.each do |day|
+        start_date = day
+        end_date = day
+        xaxis << end_date.to_date.strftime("%d/%b/%Y")
+        sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
+        sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
+        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
+        observations.each do |observation|
+          if (observation.diagnosis_category == 'SG_FEVER')
+            sg_fever_count = sg_fever_count + 1
+          end
 
+          if (observation.diagnosis_category == 'SG_URI')
+            sg_uri_count = sg_uri_count + 1
+          end
+
+          if (observation.diagnosis_category == 'SG_LRI')
+            sg_lri_count = sg_lri_count + 1
+          end
+
+          if (observation.diagnosis_category == 'SG_RI')
+            sg_ri_count = sg_ri_count + 1
+          end
+
+          if (observation.diagnosis_category == 'SG_UGI')
+            sg_ugi_count = sg_ugi_count + 1
+          end
+
+          if (observation.diagnosis_category == 'SG_LGI')
+            sg_lgi_count = sg_lgi_count + 1
+          end
+
+          if (observation.diagnosis_category == 'SG_GI')
+            sg_gi_count = sg_gi_count + 1
+          end
+
+          if (observation.diagnosis_category == 'NCD')
+            ncd_count = ncd_count + 1
+          end
+
+          if (observation.diagnosis_category == 'IDSR_DZ')
+            idsr_count = idsr_count + 1
+          end
+        end
+
+        sg_fever_data << sg_fever_count; sg_uri_data << sg_uri_count; sg_lri_data << sg_lri_count;
+        sg_ri_data << sg_ri_count; sg_ugi_data << sg_ugi_count; sg_lgi_data << sg_lgi_count;
+        sg_gi_data << sg_gi_count; ncd_data << ncd_count; idsr_data << idsr_count;
+
+      end
+
+      hash = {
+        "xaxis" => xaxis, "sg_fever_data" => sg_fever_data, "sg_uri_data" => sg_uri_data,
+        "sg_lri_data" => sg_lri_data, "sg_ri_data" => sg_ri_data, "sg_ugi_data" => sg_ugi_data,
+        "sg_lgi_data" => sg_lgi_data, "sg_gi_data" => sg_gi_data, "ncd_data" => ncd_data,
+        "idsr_data" => idsr_data
+      }
+
+      render :text => hash.to_json and return
     end
     
     if(period_type == 'weekly')
@@ -443,7 +504,7 @@ class AdminController < ApplicationController
 
       #["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI", "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
       
-      weeks.each do |week|
+      weeks.reverse.each do |week|
         start_date = week[0]
         end_date = week[1]
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
@@ -521,7 +582,7 @@ class AdminController < ApplicationController
         count = count + 1
       end
 
-      months.each do |month|
+      months.reverse.each do |month|
         start_date = month[0]
         end_date = month[1]
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
