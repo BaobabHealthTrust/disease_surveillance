@@ -585,72 +585,72 @@
             });
 
             $('#diagnosis_nine').highcharts({
-          chart: {
-            type: 'line',
-            marginRight: 130,
-            marginBottom: 25,
-            marginLeft: 32
-          },
-          title: {
-            text: '',
-            x: -20 //center
-          },
-          subtitle: {
-            text: '',
-            x: -20
-          },
-          xAxis: {
-            categories: xaxis
-          },
-          yAxis: {
-            min: 0,
-            title: {
-              text: ''
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-              }]
-          },
-          tooltip: {
-            formatter: function() {
-              return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
-            }
-          },
-          credits: {
-            enabled: false
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'bottom',
-            verticalAlign: 'top',
-            x: -10,
-            y: 100,
-            borderWidth: 0
-          },
-          plotOptions:{
-            series:{
-              allowPointSelect: true,
-              cursor: 'pointer',
-              point: {
-                events:{
-                  select: function(e) {
-                    var date = e.currentTarget.category;
-                    window.location = '/admin/diagnosis_summary?zone=national&category=IDSR_DZ&date=' + date;
+              chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25,
+                marginLeft: 32
+              },
+              title: {
+                text: '',
+                x: -20 //center
+              },
+              subtitle: {
+                text: '',
+                x: -20
+              },
+              xAxis: {
+                categories: xaxis
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: ''
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                  }]
+              },
+              tooltip: {
+                formatter: function() {
+                  return '' + this.x + ' <br /> <b>' + this.y + '</b> cases';
+                }
+              },
+              credits: {
+                enabled: false
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'bottom',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+              },
+              plotOptions:{
+                series:{
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  point: {
+                    events:{
+                      select: function(e) {
+                        var date = e.currentTarget.category;
+                        window.location = '/admin/diagnosis_summary?zone=national&category=IDSR_DZ&date=' + date;
+                      }
+                    }
                   }
                 }
-              }
-            }
-          },
-          series: [
-            {
-              showInLegend: false,
-              name: 'IDSR DZ',
-              data: results["idsr_data"]
-            }
-          ]
-        });
+              },
+              series: [
+                {
+                  showInLegend: false,
+                  name: 'IDSR DZ',
+                  data: results["idsr_data"]
+                }
+              ]
+            });
             /******************************************************************/
           }
 
