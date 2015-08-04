@@ -24,7 +24,7 @@
         currentZone = splitted_paths[splitted_paths.length - 1];
       }
 
-      function diagnosisOneChartGranular(zone, period_type){
+      function diagnosisChartGranular(zone, period_type){
         jQuery.ajax({
           type: "POST",
           url: "/admin/chart_by_zone_and_period_type_and_syndrome",
@@ -660,19 +660,19 @@
       function dailyData(){
         var zone = currentZone;
         var period_type = 'daily';
-        diagnosisOneChartGranular(zone, period_type);
+        diagnosisChartGranular(zone, period_type);
       }
       
       function weeklyData(){
         var zone = currentZone;
         var period_type = 'weekly';
-        diagnosisOneChartGranular(zone, period_type);
+        diagnosisChartGranular(zone, period_type);
       }
 
       function monthlyData(){
         var zone = currentZone;
         var period_type = 'monthly';
-        diagnosisOneChartGranular(zone, period_type);
+        diagnosisChartGranular(zone, period_type);
 
       }
 
