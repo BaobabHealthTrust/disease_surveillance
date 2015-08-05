@@ -411,7 +411,7 @@ class AdminController < ApplicationController
   end
 
   def chart_by_zone_and_period_type_and_syndrome
-    zone = params[:zone]
+    zone = params[:zone].squish
     diagnosis_category = params[:diagnosis_category]
     period_type = params[:period_type]
     dates = []
@@ -422,9 +422,9 @@ class AdminController < ApplicationController
     xaxis = []
     
     if(period_type == 'daily')
-       start_day = latest_date - 20.days
-       days = (start_day..latest_date).map{ |date| date} #21 dates
-       days.each do |day|
+      start_day = latest_date - 20.days
+      days = (start_day..latest_date).map{ |date| date} #21 dates
+      days.each do |day|
         start_date = day
         end_date = day
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
@@ -432,40 +432,94 @@ class AdminController < ApplicationController
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
         observations.each do |observation|
-          if (observation.diagnosis_category == 'SG_FEVER')
-            sg_fever_count = sg_fever_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_FEVER')
+              sg_fever_count = sg_fever_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_FEVER' && observation.zone == zone)
+              sg_fever_count = sg_fever_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_URI')
-            sg_uri_count = sg_uri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_URI')
+              sg_uri_count = sg_uri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_URI' && observation.zone == zone)
+              sg_uri_count = sg_uri_count + 1
+            end
+          end
+          
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LRI')
+              sg_lri_count = sg_lri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LRI' && observation.zone == zone)
+              sg_lri_count = sg_lri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LRI')
-            sg_lri_count = sg_lri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_RI')
+              sg_ri_count = sg_ri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_RI' && observation.zone == zone)
+              sg_ri_count = sg_ri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_RI')
-            sg_ri_count = sg_ri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_UGI')
+              sg_ugi_count = sg_ugi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_UGI' && observation.zone == zone)
+              sg_ugi_count = sg_ugi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_UGI')
-            sg_ugi_count = sg_ugi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LGI')
+              sg_lgi_count = sg_lgi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LGI' && observation.zone == zone)
+              sg_lgi_count = sg_lgi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LGI')
-            sg_lgi_count = sg_lgi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_GI')
+              sg_gi_count = sg_gi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_GI' && observation.zone == zone)
+              sg_gi_count = sg_gi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_GI')
-            sg_gi_count = sg_gi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'NCD')
+              ncd_count = ncd_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'NCD' && observation.zone == zone)
+              ncd_count = ncd_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'NCD')
-            ncd_count = ncd_count + 1
-          end
-
-          if (observation.diagnosis_category == 'IDSR_DZ')
-            idsr_count = idsr_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'IDSR_DZ')
+              idsr_count = idsr_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'IDSR_DZ' && observation.zone == zone)
+              idsr_count = idsr_count + 1
+            end
           end
         end
 
@@ -512,40 +566,93 @@ class AdminController < ApplicationController
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
         observations.each do |observation|
-          if (observation.diagnosis_category == 'SG_FEVER')
-            sg_fever_count = sg_fever_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_FEVER')
+              sg_fever_count = sg_fever_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_FEVER' && observation.zone == zone)
+              sg_fever_count = sg_fever_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_URI')
-            sg_uri_count = sg_uri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_URI')
+              sg_uri_count = sg_uri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_URI' && observation.zone == zone)
+              sg_uri_count = sg_uri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LRI')
-            sg_lri_count = sg_lri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LRI')
+              sg_lri_count = sg_lri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LRI' && observation.zone == zone)
+              sg_lri_count = sg_lri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_RI')
-            sg_ri_count = sg_ri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_RI')
+              sg_ri_count = sg_ri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_RI' && observation.zone == zone)
+              sg_ri_count = sg_ri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_UGI')
-            sg_ugi_count = sg_ugi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_UGI')
+              sg_ugi_count = sg_ugi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_UGI' && observation.zone == zone)
+              sg_ugi_count = sg_ugi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LGI')
-            sg_lgi_count = sg_lgi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LGI')
+              sg_lgi_count = sg_lgi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LGI' && observation.zone == zone)
+              sg_lgi_count = sg_lgi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_GI')
-            sg_gi_count = sg_gi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_GI')
+              sg_gi_count = sg_gi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_GI' && observation.zone == zone)
+              sg_gi_count = sg_gi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'NCD')
-            ncd_count = ncd_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'NCD')
+              ncd_count = ncd_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'NCD' && observation.zone == zone)
+              ncd_count = ncd_count + 1
+            end
           end
-
-          if (observation.diagnosis_category == 'IDSR_DZ')
-            idsr_count = idsr_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'IDSR_DZ')
+              idsr_count = idsr_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'IDSR_DZ' && observation.zone == zone)
+              idsr_count = idsr_count + 1
+            end
           end
         end
 
@@ -590,40 +697,93 @@ class AdminController < ApplicationController
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
         observations.each do |observation|
-          if (observation.diagnosis_category == 'SG_FEVER')
-            sg_fever_count = sg_fever_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_FEVER')
+              sg_fever_count = sg_fever_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_FEVER' && observation.zone == zone)
+              sg_fever_count = sg_fever_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_URI')
-            sg_uri_count = sg_uri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_URI')
+              sg_uri_count = sg_uri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_URI' && observation.zone == zone)
+              sg_uri_count = sg_uri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LRI')
-            sg_lri_count = sg_lri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LRI')
+              sg_lri_count = sg_lri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LRI' && observation.zone == zone)
+              sg_lri_count = sg_lri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_RI')
-            sg_ri_count = sg_ri_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_RI')
+              sg_ri_count = sg_ri_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_RI' && observation.zone == zone)
+              sg_ri_count = sg_ri_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_UGI')
-            sg_ugi_count = sg_ugi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_UGI')
+              sg_ugi_count = sg_ugi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_UGI' && observation.zone == zone)
+              sg_ugi_count = sg_ugi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_LGI')
-            sg_lgi_count = sg_lgi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_LGI')
+              sg_lgi_count = sg_lgi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_LGI' && observation.zone == zone)
+              sg_lgi_count = sg_lgi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'SG_GI')
-            sg_gi_count = sg_gi_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'SG_GI')
+              sg_gi_count = sg_gi_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'SG_GI' && observation.zone == zone)
+              sg_gi_count = sg_gi_count + 1
+            end
           end
 
-          if (observation.diagnosis_category == 'NCD')
-            ncd_count = ncd_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'NCD')
+              ncd_count = ncd_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'NCD' && observation.zone == zone)
+              ncd_count = ncd_count + 1
+            end
           end
-
-          if (observation.diagnosis_category == 'IDSR_DZ')
-            idsr_count = idsr_count + 1
+          if (params[zone].match(/national/i))
+            if (observation.diagnosis_category == 'IDSR_DZ')
+              idsr_count = idsr_count + 1
+            end
+          else
+            if (observation.diagnosis_category == 'IDSR_DZ' && observation.zone == zone)
+              idsr_count = idsr_count + 1
+            end
           end
         end
 
