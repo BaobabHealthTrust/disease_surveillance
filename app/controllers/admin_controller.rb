@@ -13,16 +13,16 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}#Old date first
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "IDSR_DZ"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category.keys([["#{obs_date}", "NCD"]])
@@ -64,16 +64,16 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_northern"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_northern"]])
@@ -116,16 +116,16 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_c_east"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_c_east"]])
@@ -159,16 +159,16 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_c_west"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_c_west"]])
@@ -205,13 +205,13 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_s_east"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_s_east"]])
@@ -248,13 +248,13 @@ class AdminController < ApplicationController
     0.upto(4) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
     @sg_ri = []; @sg_lri = []; @sg_uri = []; @sg_fever = []
 
-    latest_obs_dates.each do |obs_date|
+    latest_obs_dates.reverse.each do |obs_date|
       idsr_dz_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "IDSR_DZ", "zone_s_west"]])
       @idsr_dz << idsr_dz_obs.all.count
       ncd_obs = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{obs_date}", "NCD", "zone_s_west"]])
