@@ -396,10 +396,31 @@ class AdminController < ApplicationController
 
   def diagnosis_summary
     hash = {}
-    if (params[:zone].match(/national/i))
-      observations = Observation.by_obs_date_and_diagnosis_category.keys([["#{params[:date].to_date}", "#{params[:category]}"]]).all
-    else
-      observations = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}"]]).all
+    
+    unless (params[:period_type].blank?)
+      end_date = params[:date].to_date
+      start_date = end_date.beginning_of_month if (params[:period_type] == 'monthly')
+      start_date = end_date.beginning_of_week if (params[:period_type] == 'weekly')
+      start_date = end_date if (params[:period_type] == 'daily')
+      observations = []
+      my_observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
+      if (params[:zone].match(/national/i))
+        my_observations.each do |observation|
+          observations << observation if (observation.diagnosis_category == params[:category].squish)
+        end
+      else
+        my_observations.each do |observation|
+          if (observation.zone == params[:zone].squish)
+            observations << observation if (observation.diagnosis_category == params[:category].squish)
+          end
+        end
+      end
+    else #This is on Daily basis Granularity tab not clicked
+      if (params[:zone].match(/national/i))
+        observations = Observation.by_obs_date_and_diagnosis_category.keys([["#{params[:date].to_date}", "#{params[:category]}"]]).all
+      else
+        observations = Observation.by_obs_date_and_diagnosis_category_and_zone.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}"]]).all
+      end
     end
     
     observations.each do |observation|
