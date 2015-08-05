@@ -375,11 +375,41 @@ class AdminController < ApplicationController
   end
 
   def observations_by_diagnosis
-    if (params[:zone].match(/national/i))
-      observations = Observation.by_obs_date_and_diagnosis_category_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:diagnosis]}"]]).all
-    else
-      observations = Observation.by_obs_date_and_diagnosis_category_and_zone_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}", "#{params[:diagnosis]}"]]).all
+
+    unless (params[:period_type].blank?)
+      end_date = params[:date].to_date
+      start_date = end_date.beginning_of_month if (params[:period_type] == 'monthly')
+      start_date = end_date.beginning_of_week if (params[:period_type] == 'weekly')
+      start_date = end_date if (params[:period_type] == 'daily')
+      observations = []
+      my_observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
+      if (params[:zone].match(/national/i))
+        my_observations.each do |observation|
+          if (observation.diagnosis_category == params[:category].squish)
+            if (observation.diagnosis_full_name == params[:diagnosis].squish)
+              observations << observation
+            end
+          end
+        end
+      else
+        my_observations.each do |observation|
+          if (observation.zone == params[:zone].squish)
+            if (observation.diagnosis_category == params[:category].squish)
+              if (observation.diagnosis_full_name == params[:diagnosis].squish)
+                observations << observation
+              end
+            end
+          end
+        end
+      end
+    else #This is on Daily basis Granularity tab not clicked
+      if (params[:zone].match(/national/i))
+        observations = Observation.by_obs_date_and_diagnosis_category_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:diagnosis]}"]]).all
+      else
+        observations = Observation.by_obs_date_and_diagnosis_category_and_zone_and_diagnosis_full_name.keys([["#{params[:date].to_date}", "#{params[:category]}", "#{params[:zone]}", "#{params[:diagnosis]}"]]).all
+      end
     end
+    
     patient_data = {}
     count = 1
     observations.each do |obs|
