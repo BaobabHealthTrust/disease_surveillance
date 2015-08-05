@@ -15,6 +15,11 @@
     <%= csrf_meta_tags %>
     <script type="text/javascript">
       var currentZone = '';
+      var myZones = {"northern_zone":"zone_northern", "zone_central_east":"zone_c_east",
+        "zone_central_west":"zone_c_west", "zone_south_east":"zone_s_east",
+        "zone_south_west":"zone_s_west", "national":"national", "national_dashboard":"national"
+      }
+      
       pathName = location.pathname;
       if (pathName.length == 1){
         currentZone = 'national';
@@ -24,6 +29,7 @@
         currentZone = splitted_paths[splitted_paths.length - 1];
       }
 
+      currentZone = myZones[currentZone];
       function diagnosisChartGranular(zone, period_type){
         jQuery.ajax({
           type: "POST",
@@ -91,7 +97,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_FEVER&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone+ "&category=SG_FEVER&date=" + date;
                       }
                     }
                   }
@@ -160,7 +166,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_URI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=SG_URI&date=" + date;
                       }
                     }
                   }
@@ -228,7 +234,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_LRI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone +"&category=SG_LRI&date=" + date;
                       }
                     }
                   }
@@ -296,7 +302,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_RI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=SG_RI&date=" + date;
                       }
                     }
                   }
@@ -365,7 +371,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_UGI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=SG_UGI&date=" + date;
                       }
                     }
                   }
@@ -433,7 +439,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_LGI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=SG_LGI&date=" + date;
                       }
                     }
                   }
@@ -501,7 +507,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=SG_GI&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=SG_GI&date=" + date;
                       }
                     }
                   }
@@ -569,7 +575,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=NCD&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=NCD&date=" + date;
                       }
                     }
                   }
@@ -637,7 +643,7 @@
                     events:{
                       select: function(e) {
                         var date = e.currentTarget.category;
-                        window.location = '/admin/diagnosis_summary?zone=national&category=IDSR_DZ&date=' + date;
+                        window.location = "/admin/diagnosis_summary?zone=" + currentZone + "&category=IDSR_DZ&date=" + date;
                       }
                     }
                   }
