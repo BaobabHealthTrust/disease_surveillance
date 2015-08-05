@@ -415,7 +415,7 @@ class AdminController < ApplicationController
     diagnosis_category = params[:diagnosis_category]
     period_type = params[:period_type]
     dates = []
-    latest_date = Date.today
+    latest_date = '10 Mar 2014'.to_date#Date.today
     hash = {}
     sg_fever_data = []; sg_uri_data = []; sg_lri_data = []; sg_ri_data = []; sg_ugi_data = [];
     sg_lgi_data = []; sg_gi_data = []; ncd_data = []; idsr_data = [];
@@ -430,9 +430,9 @@ class AdminController < ApplicationController
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
-        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
+        observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
         observations.each do |observation|
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_FEVER')
               sg_fever_count = sg_fever_count + 1
             end
@@ -442,7 +442,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_URI')
               sg_uri_count = sg_uri_count + 1
             end
@@ -452,7 +452,7 @@ class AdminController < ApplicationController
             end
           end
           
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LRI')
               sg_lri_count = sg_lri_count + 1
             end
@@ -462,7 +462,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_RI')
               sg_ri_count = sg_ri_count + 1
             end
@@ -472,7 +472,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_UGI')
               sg_ugi_count = sg_ugi_count + 1
             end
@@ -482,7 +482,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LGI')
               sg_lgi_count = sg_lgi_count + 1
             end
@@ -492,7 +492,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_GI')
               sg_gi_count = sg_gi_count + 1
             end
@@ -502,7 +502,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'NCD')
               ncd_count = ncd_count + 1
             end
@@ -512,7 +512,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'IDSR_DZ')
               idsr_count = idsr_count + 1
             end
@@ -564,9 +564,9 @@ class AdminController < ApplicationController
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
-        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
+        observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
         observations.each do |observation|
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_FEVER')
               sg_fever_count = sg_fever_count + 1
             end
@@ -576,7 +576,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_URI')
               sg_uri_count = sg_uri_count + 1
             end
@@ -586,7 +586,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LRI')
               sg_lri_count = sg_lri_count + 1
             end
@@ -596,7 +596,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_RI')
               sg_ri_count = sg_ri_count + 1
             end
@@ -606,7 +606,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_UGI')
               sg_ugi_count = sg_ugi_count + 1
             end
@@ -616,7 +616,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LGI')
               sg_lgi_count = sg_lgi_count + 1
             end
@@ -626,7 +626,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_GI')
               sg_gi_count = sg_gi_count + 1
             end
@@ -636,7 +636,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'NCD')
               ncd_count = ncd_count + 1
             end
@@ -645,7 +645,7 @@ class AdminController < ApplicationController
               ncd_count = ncd_count + 1
             end
           end
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'IDSR_DZ')
               idsr_count = idsr_count + 1
             end
@@ -695,9 +695,9 @@ class AdminController < ApplicationController
         xaxis << end_date.to_date.strftime("%d/%b/%Y")
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
-        observations = Observation.by_obs_date.startkey([start_date.to_date]).endkey([end_date.to_date]).all
+        observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
         observations.each do |observation|
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_FEVER')
               sg_fever_count = sg_fever_count + 1
             end
@@ -707,7 +707,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_URI')
               sg_uri_count = sg_uri_count + 1
             end
@@ -717,7 +717,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LRI')
               sg_lri_count = sg_lri_count + 1
             end
@@ -727,7 +727,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_RI')
               sg_ri_count = sg_ri_count + 1
             end
@@ -737,7 +737,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_UGI')
               sg_ugi_count = sg_ugi_count + 1
             end
@@ -747,7 +747,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_LGI')
               sg_lgi_count = sg_lgi_count + 1
             end
@@ -757,7 +757,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'SG_GI')
               sg_gi_count = sg_gi_count + 1
             end
@@ -767,7 +767,7 @@ class AdminController < ApplicationController
             end
           end
 
-          if (params[zone].match(/national/i))
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'NCD')
               ncd_count = ncd_count + 1
             end
@@ -776,7 +776,8 @@ class AdminController < ApplicationController
               ncd_count = ncd_count + 1
             end
           end
-          if (params[zone].match(/national/i))
+          
+          if (params[:zone].match(/national/i))
             if (observation.diagnosis_category == 'IDSR_DZ')
               idsr_count = idsr_count + 1
             end
