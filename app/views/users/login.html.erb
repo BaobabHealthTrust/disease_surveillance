@@ -14,6 +14,40 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script src="/assets/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+    <script type="text/javascript">
+      function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+      }
+      
+      function recoverPassword(){
+        email= document.getElementById('email').value;
+        jQuery.ajax({
+          type: "POST",
+          url: "/users/recover_password",
+          data: "email=" + email,
+          success: function(){
+            
+          }
+
+        });
+      }
+
+      function confirmAction(){
+        var form = $( "#forgot" );
+        email= document.getElementById('email').value;
+        if (isEmail(email)){
+          "You are about to reset the password for the user with that email account. You can not undo this action.\
+              The new password will be sent via email and you can not undo this operation. Are you really very sure?"
+          modal_content = document.getElementById('modal_content');
+          modal_content.innerHTML = "You are about to change the password for the user with this email account (<b><i>" + email + "</i></b>) . You can not undo this operation. "
+          modal_content.innerHTML += "The new password will be sent via email and you can not undo this operation. Are you really very sure?"
+          $('#passwordReminderPopup').modal('show');
+        }
+      }
+      
+    </script>
     <%= csrf_meta_tags %>
     <style>
       #login{
@@ -125,11 +159,11 @@
             </form>
           </div>
           <div id="forgot" class="tab-pane">
-            <form action="index.html" class="form-signin">
+            <form action="#" class="form-signin">
               <p class="text-muted text-center btn-block btn btn-primary btn-rect">Enter your valid e-mail</p>
-              <input type="email"  required="required" placeholder="Your E-mail"  class="form-control" />
+              <input id="email" type="email"  required="required" placeholder="Your E-mail"  class="form-control" />
               <br /><br />
-              <button class="btn text-muted text-center btn-success" type="submit">Recover Password</button>
+              <button onclick="confirmAction();" class="btn text-muted text-center btn-success" type="submit">Recover Password</button>
             </form>
           </div>
           <div id="signup" class="tab-pane">
@@ -167,6 +201,27 @@
       </div>
     </div>
 
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="passwordReminderPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">
+              PASSWORD CONFIRMATION RECOVERY
+            </h4>
+          </div>
+          <div class="modal-body">
+            <span id="modal_content" style="text-align:center;"></span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="recoverPassword();" data-dismiss="modal">Okay</button>
+              <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CONFIRMATION POPUP END -->
 
     <!-- PAGE LEVEL SCRIPTS -->
     <script src="/assets/jquery-2.0.3.min.js"></script>

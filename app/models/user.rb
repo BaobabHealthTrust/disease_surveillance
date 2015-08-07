@@ -28,6 +28,7 @@ class User < CouchRest::Model::Base
 
   design do
     view :by_active
+    view :by_email
   end
 
   design do
