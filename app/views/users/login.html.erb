@@ -28,7 +28,7 @@
           url: "/users/recover_password",
           data: "email=" + email,
           success: function(){
-            
+            showFeedBack();
           }
 
         });
@@ -46,7 +46,13 @@
           $('#passwordReminderPopup').modal('show');
         }
       }
-      
+
+      function showFeedBack(){
+        $('#feedBackPopup').modal('show');
+        window.setTimeout(function(){
+         $('#feedBackPopup').modal('hide');
+        },3500);
+      }
     </script>
     <%= csrf_meta_tags %>
     <style>
@@ -216,6 +222,27 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="recoverPassword();" data-dismiss="modal">Okay</button>
               <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--CONFIRMATION POPUP END -->
+
+    <!--CONFIRMATION POPUP BEGIN -->
+    <div class="modal fade" id="feedBackPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">
+              PASSWORD SENT VIA EMAIL
+            </h4>
+          </div>
+          <div class="modal-body">
+            <span id="modal_content" style="text-align:center;">Please check your mailbox to get your new password!!</span>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" data-dismiss="modal">Okay</button>
             </div>
           </div>
         </div>
