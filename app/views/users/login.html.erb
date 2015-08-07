@@ -50,9 +50,17 @@
       function showFeedBack(){
         $('#feedBackPopup').modal('show');
         window.setTimeout(function(){
-         $('#feedBackPopup').modal('hide');
+          $('#feedBackPopup').modal('hide');
         },3500);
       }
+
+      /*function magicSwap(){
+        var activeForm = '#signup > form';
+        $(activeForm).addClass('magictime swap');
+        setTimeout(function () {
+          $(activeForm).removeClass('magictime swap');
+        }, 1000);
+      }*/
     </script>
     <%= csrf_meta_tags %>
     <style>
