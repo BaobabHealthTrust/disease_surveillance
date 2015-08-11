@@ -202,7 +202,7 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
@@ -245,7 +245,7 @@ class AdminController < ApplicationController
     observations = Observation.all
     obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
     latest_obs_dates = []
-    0.upto(4) do |i|
+    0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
