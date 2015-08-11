@@ -19,6 +19,9 @@
         "zone_central_west":"zone_c_west", "zone_south_east":"zone_s_east",
         "zone_south_west":"zone_s_west", "national":"national", "national_dashboard":"national"
       }
+
+      var granularityMode = null;
+      var period_type = '';
       
       pathName = location.pathname;
       if (pathName.length == 1){
@@ -665,21 +668,23 @@
 
       function dailyData(){
         var zone = currentZone;
-        var period_type = 'daily';
+        period_type = 'daily';
         diagnosisChartGranular(zone, period_type);
+        granularityMode = period_type;
       }
       
       function weeklyData(){
         var zone = currentZone;
-        var period_type = 'weekly';
+        period_type = 'weekly';
         diagnosisChartGranular(zone, period_type);
+        granularityMode = period_type;
       }
 
       function monthlyData(){
         var zone = currentZone;
-        var period_type = 'monthly';
+        period_type = 'monthly';
         diagnosisChartGranular(zone, period_type);
-
+        granularityMode = period_type;
       }
 
     </script>

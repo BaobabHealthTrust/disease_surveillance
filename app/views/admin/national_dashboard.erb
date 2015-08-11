@@ -702,9 +702,18 @@
             $('.small_graph').removeClass('small_graph').addClass('big_graph');
             $('.span3').removeClass('span3').addClass('span4');
             $('.small').removeClass('small').addClass('big');
-            diagnosisOneChart();diagnosisTwoChart();diagnosisThreeChart();
-            diagnosisFourChart();diagnosisFiveChart();diagnosisSixChart();
-            diagnosisSevenChart();diagnosisEightChart();diagnosisNineChart();
+            if (granularityMode){
+              $('#diagnosis_one').html(''); $('#diagnosis_two').html(''); $('#diagnosis_three').html('');
+              $('#diagnosis_four').html(''); $('#diagnosis_five').html(''); $('#diagnosis_six').html('');
+              $('#diagnosis_seven').html(''); $('#diagnosis_eight').html(''); $('#diagnosis_nine').html('');
+              diagnosisChartGranular(currentZone, period_type);
+            }
+            else{
+              diagnosisOneChart();diagnosisTwoChart();diagnosisThreeChart();
+              diagnosisFourChart();diagnosisFiveChart();diagnosisSixChart();
+              diagnosisSevenChart();diagnosisEightChart();diagnosisNineChart();
+            }
+            
             $('.hide-sidebar').hide();
             $('.show-sidebar').show();
           });
@@ -718,9 +727,17 @@
           $('.big_graph').removeClass('big_graph').addClass('small_graph');
           $('.span4').removeClass('span4').addClass('span3');
           $('.big').removeClass('big').addClass('small');
-          diagnosisOneChart();diagnosisTwoChart();diagnosisThreeChart();
-          diagnosisFourChart();diagnosisFiveChart();diagnosisSixChart();
-          diagnosisSevenChart();diagnosisEightChart();diagnosisNineChart();
+          if (granularityMode){
+            $('#diagnosis_one').html(''); $('#diagnosis_two').html(''); $('#diagnosis_three').html('');
+            $('#diagnosis_four').html(''); $('#diagnosis_five').html(''); $('#diagnosis_six').html('');
+            $('#diagnosis_seven').html(''); $('#diagnosis_eight').html(''); $('#diagnosis_nine').html('');
+            diagnosisChartGranular(currentZone, period_type);
+          }
+          else{
+            diagnosisOneChart();diagnosisTwoChart();diagnosisThreeChart();
+            diagnosisFourChart();diagnosisFiveChart();diagnosisSixChart();
+            diagnosisSevenChart();diagnosisEightChart();diagnosisNineChart();
+          }
           $('#sidemap').show('slow');
         });
       };
@@ -740,11 +757,11 @@
       .diagnosis_three{
         width: 200px;
       }
-      
+
       .small{
         left:25%;
       }
-      
+
       .big{
         left:1%;
       }
@@ -752,7 +769,7 @@
       .small_graph{
         width:450px;
       }
-      
+
       .big_graph{
         width:590px;
       }
@@ -785,7 +802,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row-fluid small" style="position: absolute; top:10%; top:80px;">
       <div class="span3">
         <div class="block">
@@ -922,15 +939,15 @@
             <table class="table table-bordered">
               <tbody>
     <% @data.each do |row| %>
-                          <tr>
+                                    <tr>
       <% row.each do |values| %>
         <%
         diagnosis = values[0]
         count = values[1]
       %>
-                                      <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
+                                                          <td diagnosis="<%= diagnosis %>" onclick="viewPatients(this)"><a href="#"><span class="badge badge-info pull-right"><%= count %></span> <%= diagnosis %></a></td>
       <% end %>
-                          </tr>
+                                    </tr>
     <% end %>
               </tbody>
             </table>
