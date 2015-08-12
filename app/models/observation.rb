@@ -9,6 +9,7 @@ class Observation < CouchRest::Model::Base
   property :facility, String
   property :zone, String
   property :obs_date, Date
+  property :obs_id, Integer
   timestamps!
 
   design do
@@ -20,6 +21,7 @@ class Observation < CouchRest::Model::Base
     view :by_diagnosis_category
     view :by_facility
     view :by_zone
+    view :by_obs_id_and_facility
     view :by_zone_and_diagnosis_category
     view :by_diagnosis_full_name_and_zone
     view :by_diagnosis_category_and_zone

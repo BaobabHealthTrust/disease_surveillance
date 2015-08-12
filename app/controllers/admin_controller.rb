@@ -334,6 +334,10 @@ class AdminController < ApplicationController
       diagnosis_full_name = values["diagnosis_full_name"]
       obs_date = values["obs_date"]
       facility = values["facility"]
+      obs_id = values["obs_id"]
+      
+      obs_exists = Observation.by_obs_id_and_facility.keys([[obs_id, "#{facility}"]]).all
+      next unless obs_exists.blank? #The observation was already created and it should be skipped
       obs = Observation.create({
           :national_id => national_id,
           :gender => gender,
@@ -341,7 +345,8 @@ class AdminController < ApplicationController
           :diagnosis_short_name => diagnosis_short_name,
           :diagnosis_full_name => diagnosis_full_name,
           :facility => facility,
-          :obs_date => obs_date
+          :obs_date => obs_date,
+          :obs_id => obs_id
         })
       diagnosis_categories = DiagnosisCategory.by_full_name(:key => diagnosis_full_name).all.map(&:category).uniq
       update_obs_diagnosis_category(obs, diagnosis_categories)
@@ -363,7 +368,8 @@ class AdminController < ApplicationController
             :diagnosis_full_name => obs.diagnosis_full_name,
             :diagnosis_category => category,
             :facility => obs.facility,
-            :obs_date => obs.obs_date
+            :obs_date => obs.obs_date,
+            :obs_id => obs.obs_id
           })
       end
       count = count + 1
