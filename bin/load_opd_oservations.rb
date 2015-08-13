@@ -51,6 +51,7 @@ def pull_opd_diagnoses
     obs_date = values["obs_date"]
     facility = values["facility"]
     obs_id = values["obs_id"]
+    zone = values["zone"]
 
     obs_exists = Observation.by_obs_id_and_facility.keys([[obs_id, "#{facility}"]]).all
     next unless obs_exists.blank? #The observation was already created and it should be skipped
@@ -62,7 +63,8 @@ def pull_opd_diagnoses
         :diagnosis_full_name => diagnosis_full_name,
         :facility => facility,
         :obs_date => obs_date,
-        :obs_id => obs_id
+        :obs_id => obs_id,
+        :zone => zone
       })
     diagnosis_categories = DiagnosisCategory.by_full_name(:key => diagnosis_full_name).all.map(&:category).uniq
     update_obs_diagnosis_category(obs, diagnosis_categories)
@@ -85,7 +87,8 @@ def update_obs_diagnosis_category(obs, diagnosis_categories)
           :diagnosis_category => category,
           :facility => obs.facility,
           :obs_date => obs.obs_date,
-          :obs_id => obs.obs_id
+          :obs_id => obs.obs_id,
+          :zone => obs.zone
         })
     end
     count = count + 1
