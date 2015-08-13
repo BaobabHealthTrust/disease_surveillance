@@ -16,7 +16,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}#Old date first
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}#Old date first
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -67,7 +67,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -119,7 +119,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -162,7 +162,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -205,7 +205,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -248,7 +248,7 @@ class AdminController < ApplicationController
     0.upto(20) do |i|
       latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
     end
-    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y')}
+    @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
     @idsr_dz = []; @ncd = []; @sg_gi = []; @sg_lgi = []; @sg_ugi = []
@@ -423,7 +423,7 @@ class AdminController < ApplicationController
       patient_data[count]["national_id"] = obs.national_id
       patient_data[count]["gender"] = obs.gender
       patient_data[count]["age"] = obs.age
-      patient_data[count]["obs_date"] = obs.obs_date.to_date.strftime("%d/%b/%Y")
+      patient_data[count]["obs_date"] = obs.obs_date.to_date.strftime("%d/%b/%Y") rescue '??'
       patient_data[count]["facility"] = obs.facility
       count = count + 1
     end
@@ -484,7 +484,7 @@ class AdminController < ApplicationController
       days.each do |day|
         start_date = day
         end_date = day
-        xaxis << end_date.to_date.strftime("%d/%b/%Y")
+        xaxis << end_date.to_date.strftime("%d/%b/%Y") rescue '??'
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
@@ -618,7 +618,7 @@ class AdminController < ApplicationController
       weeks.reverse.each do |week|
         start_date = week[0]
         end_date = week[1]
-        xaxis << end_date.to_date.strftime("%d/%b/%Y")
+        xaxis << end_date.to_date.strftime("%d/%b/%Y") rescue '??'
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
@@ -749,7 +749,7 @@ class AdminController < ApplicationController
       months.reverse.each do |month|
         start_date = month[0]
         end_date = month[1]
-        xaxis << end_date.to_date.strftime("%d/%b/%Y")
+        xaxis << end_date.to_date.strftime("%d/%b/%Y") rescue '??'
         sg_fever_count = 0; sg_uri_count = 0; sg_lri_count = 0; sg_ri_count = 0; sg_ugi_count = 0;
         sg_lgi_count = 0; sg_gi_count = 0; ncd_count = 0; idsr_count = 0;
         observations = Observation.by_obs_date.startkey(start_date.to_date).endkey(end_date.to_date).all
