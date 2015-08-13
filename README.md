@@ -8,5 +8,6 @@ Edit couchdb.yml file to match your couch db settings
 3. cp config/application.yml.example config/application.yml
 Edit the file to point to the address where the OPD application is running
 4. rails runner bin/load_diagnosis_type.rb
+5. rails runner bin/load_opd_oservations.rb "start_date_here end_date_here"
 5. Run the application by typing rails s
 
