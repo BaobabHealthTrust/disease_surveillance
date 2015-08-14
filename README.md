@@ -1,4 +1,15 @@
 Disease surveillance Dashboard
+
+ENVIRONMENT REQUIREMENTS
+1. Ruby >= 2.0.0
+2. Rails >= 4.0.0
+
+DATABASE
+1. Couch DB
+
+BROWSER
+1. Firefox >=30
+
 HOW TO SETUP
 Make sure you have the source code or you can get it from github
 

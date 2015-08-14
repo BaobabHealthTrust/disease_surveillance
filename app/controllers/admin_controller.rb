@@ -10,12 +10,12 @@ class AdminController < ApplicationController
   end
 
   def national_dashboard
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}#Old date first
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -44,12 +44,12 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
+    #observations.each do |observation|
+    #diagnosis_name = observation.diagnosis_full_name
+    # hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
+    # hash[diagnosis_name] += 1
+    #end
+    #@data = hash.to_a.in_groups_of(3)
   end
 
   def regional_dashboard
@@ -61,12 +61,12 @@ class AdminController < ApplicationController
   end
 
   def northern_zone
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -95,12 +95,6 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
   end
 
   def central_zone
@@ -112,13 +106,12 @@ class AdminController < ApplicationController
   end
 
   def zone_central_east
-    #Observation.by_zone_and_diagnosis_category.keys([["zone_c_east", "SG_FEVER"]])
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -147,21 +140,15 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
   end
 
   def zone_central_west
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -190,21 +177,16 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
+
   end
 
   def zone_south_east
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -233,21 +215,15 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
   end
 
   def zone_south_west
-    observations = Observation.all
-    obs_dates = observations.collect{|o|o.obs_date.to_date}.uniq.sort.reverse
-    latest_obs_dates = []
-    0.upto(20) do |i|
-      latest_obs_dates << obs_dates[i] #We are only interested in the five latest days
-    end
+    obs_dates = []
+    start_date = '28/March/2012'.to_date
+    1.upto(21){|i|
+      obs_dates << start_date - i.days
+    }
+    latest_obs_dates = obs_dates
     @latest_obs_dates = latest_obs_dates.reverse.collect{|d|d.strftime('%d/%b/%Y') rescue '??'}
     diagnosis_categories = ["IDSR_DZ", "NCD", "SG_GI", "SG_LGI", "SG_UGI",
       "SG_RI", "SG_LRI", "SG_URI", "SG_FEVER"]
@@ -276,12 +252,6 @@ class AdminController < ApplicationController
     end
 
     hash = {}
-    observations.each do |observation|
-      diagnosis_name = observation.diagnosis_full_name
-      hash[diagnosis_name] = 0 if hash[diagnosis_name].blank?
-      hash[diagnosis_name] += 1
-    end
-    @data = hash.to_a.in_groups_of(3)
   end
 
   def diagnosis_settings_menu
@@ -472,7 +442,7 @@ class AdminController < ApplicationController
     diagnosis_category = params[:diagnosis_category]
     period_type = params[:period_type]
     dates = []
-    latest_date = '10 Mar 2014'.to_date#Date.today
+    latest_date = '28 Mar 2013'.to_date#Date.today
     hash = {}
     sg_fever_data = []; sg_uri_data = []; sg_lri_data = []; sg_ri_data = []; sg_ugi_data = [];
     sg_lgi_data = []; sg_gi_data = []; ncd_data = []; idsr_data = [];
